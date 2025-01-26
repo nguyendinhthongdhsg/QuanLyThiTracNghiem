@@ -95,8 +95,6 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-        jPasswordField1.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
