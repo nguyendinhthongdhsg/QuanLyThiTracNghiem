@@ -52,13 +52,13 @@ public class Login extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButtonLogin = new javax.swing.JButton();
         jCheckBoxRememberPassword = new javax.swing.JCheckBox();
-        jTextField3 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabelLinkToForgotPassword = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabelUserIcon = new javax.swing.JLabel();
         jLabelShowPasswordIcon = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -95,6 +95,8 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
+        jPasswordField1.setText("jPasswordField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +114,7 @@ public class Login extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelShowPasswordIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
@@ -139,9 +141,9 @@ public class Login extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowPasswordIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelShowPasswordIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jPasswordField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCheckBoxRememberPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -205,7 +207,7 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelLinkToRegister;
     private javax.swing.JLabel jLabelShowPasswordIcon;
     private javax.swing.JLabel jLabelUserIcon;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
