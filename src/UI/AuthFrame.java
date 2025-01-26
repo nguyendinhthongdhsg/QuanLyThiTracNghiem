@@ -4,6 +4,8 @@
  */
 package UI;
 
+import UI.Component.Login;
+import UI.Component.Register;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -16,6 +18,9 @@ public class AuthFrame extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
+    JPanelLoader jPanelLoader = new JPanelLoader();
+    
     public AuthFrame() {
         initComponents();
     }
@@ -30,21 +35,9 @@ public class AuthFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabelLogo = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jButtonLogin = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabelLinkToRegister = new javax.swing.JLabel();
-        jLabelUserIcon = new javax.swing.JLabel();
-        jLabelShowPasswordIcon = new javax.swing.JLabel();
-        jCheckBoxRememberPassword = new javax.swing.JCheckBox();
-        jLabelLinkToForgotPassword = new javax.swing.JLabel();
+        jPanelAuth = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -65,121 +58,33 @@ public class AuthFrame extends javax.swing.JFrame {
         jLabel1.setText("THI TRẮC NGHIỆM TRỰC TUYẾN");
         jLabel1.setOpaque(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
+        jLabelLogo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogo.setOpaque(true);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+        jPanelAuth.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelAuth.setPreferredSize(new java.awt.Dimension(450, 0));
+
+        javax.swing.GroupLayout jPanelAuthLayout = new javax.swing.GroupLayout(jPanelAuth);
+        jPanelAuth.setLayout(jPanelAuthLayout);
+        jPanelAuthLayout.setHorizontalGroup(
+            jPanelAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setPreferredSize(new java.awt.Dimension(450, 0));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("ĐĂNG NHẬP");
-
-        jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonLogin.setText("Đăng nhập");
-
-        jLabel4.setText("Tên đăng nhập");
-
-        jLabel5.setText("Mật khẩu");
-
-        jLabel6.setText("Bạn chưa có tài khoản?");
-
-        jLabelLinkToRegister.setForeground(new java.awt.Color(51, 51, 255));
-        jLabelLinkToRegister.setText("<html><u>Đăng ký ngay!</u></html>");
-        jLabelLinkToRegister.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelLinkToRegisterMouseClicked(evt);
-            }
-        });
-
-        jLabelShowPasswordIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabelShowPasswordIconMouseReleased(evt);
-            }
-        });
-
-        jCheckBoxRememberPassword.setText("Nhớ mật khẩu");
-
-        jLabelLinkToForgotPassword.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelLinkToForgotPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelLinkToForgotPassword.setText("Quên mật khẩu?");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabelUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabelShowPasswordIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jCheckBoxRememberPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelLinkToForgotPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabelLinkToRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(87, 87, 87))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowPasswordIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCheckBoxRememberPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelLinkToForgotPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabelLinkToRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+        jPanelAuthLayout.setVerticalGroup(
+            jPanelAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,9 +93,14 @@ public class AuthFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanelAuth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +108,14 @@ public class AuthFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanelAuth, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -213,37 +128,9 @@ public class AuthFrame extends javax.swing.JFrame {
         Image scaledImgLogo = imgLogo.getScaledInstance(jLabelLogo.getWidth(), jLabelLogo.getHeight(), Image.SCALE_SMOOTH);
         jLabelLogo.setIcon(new ImageIcon(scaledImgLogo));
         
-        ImageIcon user = new ImageIcon(getClass().getResource("/icon/user.png"));
-        Image imgUser = user.getImage();
-        Image scaledImgUser = imgUser.getScaledInstance(jLabelUserIcon.getWidth(), jLabelUserIcon.getHeight(), Image.SCALE_SMOOTH);
-        jLabelUserIcon.setIcon(new ImageIcon(scaledImgUser));     
-        
-        ImageIcon hidden = new ImageIcon(getClass().getResource("/icon/hidden.png"));
-        Image imgHidden = hidden.getImage();
-        Image scaledImgHidden = imgHidden.getScaledInstance(jLabelShowPasswordIcon.getWidth(), jLabelShowPasswordIcon.getHeight(), Image.SCALE_SMOOTH);
-        jLabelShowPasswordIcon.setIcon(new ImageIcon(scaledImgHidden));
-        
+        Login jPanelLogin = new Login(this, jPanelAuth);
+        jPanelLoader.jPanelLoader(jPanelAuth, jPanelLogin);
     }//GEN-LAST:event_formWindowOpened
-
-    private void jLabelShowPasswordIconMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelShowPasswordIconMouseReleased
-        if(isShowPassword) {
-            ImageIcon hidden = new ImageIcon(getClass().getResource("/icon/hidden.png"));
-            Image imgHidden = hidden.getImage();
-            Image scaledImgHidden = imgHidden.getScaledInstance(jLabelShowPasswordIcon.getWidth(), jLabelShowPasswordIcon.getHeight(), Image.SCALE_SMOOTH);
-            jLabelShowPasswordIcon.setIcon(new ImageIcon(scaledImgHidden));
-            isShowPassword = false;
-        } else {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/eye.png"));
-            Image imgEye = eye.getImage();
-            Image scaledImgEye = imgEye.getScaledInstance(jLabelShowPasswordIcon.getWidth(), jLabelShowPasswordIcon.getHeight(), Image.SCALE_SMOOTH);
-            jLabelShowPasswordIcon.setIcon(new ImageIcon(scaledImgEye)); 
-            isShowPassword = true;
-        }
-    }//GEN-LAST:event_jLabelShowPasswordIconMouseReleased
-
-    private void jLabelLinkToRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLinkToRegisterMouseClicked
-        setTitle("Đăng ký");
-    }//GEN-LAST:event_jLabelLinkToRegisterMouseClicked
 
     /**
      * @param args the command line arguments
@@ -280,25 +167,11 @@ public class AuthFrame extends javax.swing.JFrame {
             }
         });
     }
-
-    private boolean isShowPassword = false;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonLogin;
-    private javax.swing.JCheckBox jCheckBoxRememberPassword;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabelLinkToForgotPassword;
-    private javax.swing.JLabel jLabelLinkToRegister;
     private javax.swing.JLabel jLabelLogo;
-    private javax.swing.JLabel jLabelShowPasswordIcon;
-    private javax.swing.JLabel jLabelUserIcon;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelAuth;
     // End of variables declaration//GEN-END:variables
 }
