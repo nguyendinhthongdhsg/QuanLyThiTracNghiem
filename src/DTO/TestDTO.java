@@ -4,7 +4,7 @@
  */
 package DTO;
 
-public class Test {
+public class TestDTO {
     private int testID;
     private String testCode;
     private String testTitle;
@@ -17,7 +17,7 @@ public class Test {
     private String testDate;
     private int testStatus;
 
-    public Test() {}
+    public TestDTO() {}
 
     // Getters and setters
     public int getTestID() {

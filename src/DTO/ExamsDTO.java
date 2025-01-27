@@ -4,13 +4,13 @@
  */
 package DTO;
 
-public class Exams {
+public class ExamsDTO {
     private String testCode;
     private int exOrder;
     private String exCode;
     private String exQuesIDs;
 
-    public Exams() {}
+    public ExamsDTO() {}
 
     public String getTestCode() {
         return testCode;

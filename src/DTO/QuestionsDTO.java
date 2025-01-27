@@ -4,7 +4,7 @@
  */
 package DTO;
 
-public class Questions {
+public class QuestionsDTO {
     private int qID;
     private String qContent;
     private String qPictures;
@@ -12,7 +12,7 @@ public class Questions {
     private String qLevel;
     private byte qStatus;
 
-    public Questions() {}
+    public QuestionsDTO() {}
 
     // Getters and setters
     public int getqID() {

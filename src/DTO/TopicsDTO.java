@@ -4,13 +4,13 @@
  */
 package DTO;
 
-public class Topics {
+public class TopicsDTO {
     private int tpID;
     private String tpTitle;
     private int tpParent;
     private byte tpStatus;
 
-    public Topics() {}
+    public TopicsDTO() {}
     // Getters and setters
     public int getTpID() {
         return tpID;

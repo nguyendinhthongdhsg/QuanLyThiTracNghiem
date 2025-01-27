@@ -4,7 +4,7 @@
  */
 package DTO;
 
-public class Users {
+public class UsersDTO {
     private int userID;
     private String userName;
     private String userEmail;
@@ -12,7 +12,7 @@ public class Users {
     private String userFullName;
     private byte isAdmin;
 
-    public Users() {}
+    public UsersDTO() {}
 
     public int getUserID() {
         return userID;

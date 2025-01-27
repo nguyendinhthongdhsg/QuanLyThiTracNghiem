@@ -5,7 +5,7 @@
 package DTO;
 
 
-public class Result {
+public class ResultDTO {
     private int rsNum;
     private int userID;
     private String exCode;
@@ -13,7 +13,7 @@ public class Result {
     private double rsMark;
     private String rsDate;
 
-    public Result() {}
+    public ResultDTO() {}
 
     public int getRsNum() {
         return rsNum;

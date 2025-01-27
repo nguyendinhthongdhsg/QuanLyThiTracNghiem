@@ -4,7 +4,7 @@
  */
 package DTO;
 
-public class Answers {
+public class AnswersDTO {
     private int awID;
     private int qID;
     private String awContent;
@@ -12,7 +12,7 @@ public class Answers {
     private boolean isRight;
     private byte awStatus;
 
-    public Answers() {}
+    public AnswersDTO() {}
 
     // Getters and setters
     public int getAwID() {
