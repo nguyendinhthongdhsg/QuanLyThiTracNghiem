@@ -5,7 +5,6 @@
 package UI;
 
 import UI.Component.Login;
-import UI.Component.Register;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -16,7 +15,7 @@ import javax.swing.ImageIcon;
 public class AuthFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Creates new form AuthFrame
      */
     
     JPanelLoader jPanelLoader = new JPanelLoader();

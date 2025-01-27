@@ -13,6 +13,11 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class MySQLConnection {
+    public static void main(String [] args) {
+        Connection c = getConnection();
+        closeConnection(c);
+    }
+    
     public static Connection getConnection() {
         Connection result = null;
         try {
@@ -24,9 +29,9 @@ public class MySQLConnection {
             String password = "anhladuado1";
             //Tao ket noi 
             result = DriverManager.getConnection(url, userName, password);
-            System.out.println("Đã kết nối đến cơ sở dữ liệu !");
+            System.out.println("/* Connected database! */");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed connect database!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return result;
     }
@@ -35,10 +40,11 @@ public class MySQLConnection {
         try {
             if (c != null) {
                 c.close();
+                System.out.println("/* Closed database */");
             }
         } catch (SQLException e) {
             // TODO: handle exception
-            JOptionPane.showMessageDialog(null, "Không thể đóng cơ sở dữ liệu !", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed close database!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
