@@ -7,6 +7,7 @@ package UI.Component;
 import BLL.UsersBLL;
 import DTO.UsersDTO;
 import UI.JPanelLoader;
+import UI.MainFrame;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,7 +27,7 @@ public class Login extends javax.swing.JPanel {
     private boolean isShowPassword = false;
     JPanelLoader jPanelLoader = new JPanelLoader();
     
-    JFrame main;
+    JFrame jFrameAuth;
     JPanel jPanelAuth;
     
     public Login() {
@@ -34,10 +35,10 @@ public class Login extends javax.swing.JPanel {
         setIcon();
     }
     
-    public Login(JFrame main, JPanel jPanelAuth) {
+    public Login(JFrame jFrameAuth, JPanel jPanelAuth) {
         initComponents();
         setIcon();
-        this.main = main;
+        this.jFrameAuth = jFrameAuth;
         this.jPanelAuth = jPanelAuth;
     }
 
@@ -68,8 +69,8 @@ public class Login extends javax.swing.JPanel {
         jLabelLinkToRegister.setForeground(new java.awt.Color(51, 51, 255));
         jLabelLinkToRegister.setText("<html><u>Đăng ký ngay!</u></html>");
         jLabelLinkToRegister.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelLinkToRegisterMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelLinkToRegisterMousePressed(evt);
             }
         });
 
@@ -174,17 +175,8 @@ public class Login extends javax.swing.JPanel {
         Image imgHidden = hidden.getImage();
         Image scaledImgHidden = imgHidden.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         jLabelShowPasswordIcon.setIcon(new ImageIcon(scaledImgHidden));
-        
-        revalidate();
-        repaint();
     }
     
-    private void jLabelLinkToRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLinkToRegisterMouseClicked
-        main.setTitle("Đăng ký");
-        Register jPanelRegister = new Register(main, jPanelAuth);
-        jPanelLoader.jPanelLoader(jPanelAuth, jPanelRegister);
-    }//GEN-LAST:event_jLabelLinkToRegisterMouseClicked
-
     private void jLabelShowPasswordIconMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelShowPasswordIconMouseReleased
         if(isShowPassword) {
             ImageIcon hidden = new ImageIcon(getClass().getResource("/icon/hidden.png"));
@@ -217,16 +209,9 @@ public class Login extends javax.swing.JPanel {
         UsersDTO user = UsersBLL.authenticateUser(username, password);
 
         if (user != null) {
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-            if (user.getIsAdmin() == 1) { 
-             // new AdminFrame().setVisible(true); 
-
-            } else {
-             // new UserFrame().setVisible(true); 
-            }
-
-
+            jFrameAuth.setVisible(false);
+            MainFrame mainFrame = new MainFrame(user);
+            mainFrame.setVisible(true);
         } else {
             // Nếu thông tin đăng nhập không đúng
             JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu sai!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -234,6 +219,12 @@ public class Login extends javax.swing.JPanel {
     }
 
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jLabelLinkToRegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLinkToRegisterMousePressed
+        jFrameAuth.setTitle("Đăng ký");
+        Register jPanelRegister = new Register(jFrameAuth, jPanelAuth);
+        jPanelLoader.jPanelLoader(jPanelAuth, jPanelRegister);
+    }//GEN-LAST:event_jLabelLinkToRegisterMousePressed
     
     
 

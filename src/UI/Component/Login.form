@@ -100,7 +100,7 @@
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;&#x110;&#x103;ng k&#xfd; ngay!&lt;/u&gt;&lt;/html&gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelLinkToRegisterMouseClicked"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelLinkToRegisterMousePressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

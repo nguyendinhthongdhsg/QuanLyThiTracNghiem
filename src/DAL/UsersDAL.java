@@ -12,7 +12,7 @@ public class UsersDAL {
     public boolean registerUser(UsersDTO user) {
         String sql = "INSERT INTO Users (userName, userEmail, userPassword, userFullName, isAdmin) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = MySQLConnection.getConnection(); 
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getUserEmail());
             ps.setString(3, user.getUserPassword());
@@ -28,7 +28,7 @@ public class UsersDAL {
     public boolean checkUserExists(String userName) {
         String sql = "SELECT COUNT(*) FROM Users WHERE userName = ?";
         try (Connection conn = MySQLConnection.getConnection(); 
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, userName);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -46,7 +46,7 @@ public class UsersDAL {
     String query = "SELECT * FROM users WHERE userName = ? AND userPassword = ?";
     
     try (Connection conn = MySQLConnection.getConnection(); 
-         PreparedStatement ps = conn.prepareStatement(query)) {
+        PreparedStatement ps = conn.prepareStatement(query)) {
         ps.setString(1, username);
         ps.setString(2, password);
 

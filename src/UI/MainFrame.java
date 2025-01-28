@@ -4,6 +4,7 @@
  */
 package UI;
 
+import DTO.UsersDTO;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -17,8 +18,13 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
+    }
+    
+    public MainFrame(UsersDTO user) {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        setFullNameUser(user.getUserFullName());
+        setMenu(user.getIsAdmin());
     }
 
     /**
@@ -33,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelMain = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelUserFullName = new javax.swing.JLabel();
         jLabelAvatar = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButtonInformation = new javax.swing.JButton();
@@ -46,6 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonTakeTest = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanelFunction = new javax.swing.JPanel();
+        jLabelBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thi trắc nghiệm trực tuyến");
@@ -64,8 +71,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(249, 249, 249));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Nguyễn Đình Thông");
+        jLabelUserFullName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelUserFullName.setText("Nguyễn Đình Thông");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -75,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabelAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelUserFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -83,7 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUserFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -143,7 +150,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButtonTestManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButtonExamManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -175,11 +182,17 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelFunction.setLayout(jPanelFunctionLayout);
         jPanelFunctionLayout.setHorizontalGroup(
             jPanelFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGroup(jPanelFunctionLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanelFunctionLayout.setVerticalGroup(
             jPanelFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGroup(jPanelFunctionLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -238,6 +251,23 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setFullNameUser(String userFullName) {
+        jLabelUserFullName.setText(userFullName);
+    }
+    
+    private void setMenu(byte isAdmin) {
+        if(isAdmin != 0) {
+            
+        } else {
+            jButtonUserManagement.setVisible(false);
+            jButtonQuestionManagement.setVisible(false);
+            jButtonTopicManagement.setVisible(false);
+            jButtonTestManagement.setVisible(false);
+            jButtonExamManagement.setVisible(false);
+            jButtonStatistical.setVisible(false);
+        }
+    }
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         ImageIcon user = new ImageIcon(getClass().getResource("/icon/user.png"));
         Image imgUser = user.getImage();
@@ -283,6 +313,12 @@ public class MainFrame extends javax.swing.JFrame {
         Image imgInformation = information.getImage();
         Image scaledImgInformation = imgInformation.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         jButtonInformation.setIcon(new ImageIcon(scaledImgInformation));
+        
+        ImageIcon backgroundFunction = new ImageIcon(getClass().getResource("/image/Logo.png"));
+        Image imgBackgroundFunction = backgroundFunction.getImage();
+        Image scaledBackgroundFunction = imgBackgroundFunction.getScaledInstance(jLabelBackground.getWidth(), 
+                jLabelBackground.getHeight(), Image.SCALE_SMOOTH);
+        jLabelBackground.setIcon(new ImageIcon(scaledBackgroundFunction));
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -329,8 +365,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTestManagement;
     private javax.swing.JButton jButtonTopicManagement;
     private javax.swing.JButton jButtonUserManagement;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAvatar;
+    private javax.swing.JLabel jLabelBackground;
+    private javax.swing.JLabel jLabelUserFullName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

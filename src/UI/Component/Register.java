@@ -22,16 +22,16 @@ public class Register extends javax.swing.JPanel {
      */
     
     JPanelLoader jPanelLoader = new JPanelLoader();
-    JFrame main;
+    JFrame jFrameAuth;
     JPanel jPanelAuth;    
     
     public Register() {
         initComponents();
     }
     
-    public Register(JFrame main, JPanel jPanelAuth) {
+    public Register(JFrame jFrameAuth, JPanel jPanelAuth) {
         initComponents();
-        this.main = main;
+        this.jFrameAuth = jFrameAuth;
         this.jPanelAuth = jPanelAuth;
     }
 
@@ -88,8 +88,8 @@ public class Register extends javax.swing.JPanel {
         jLabelLinkToLogin.setForeground(new java.awt.Color(51, 51, 255));
         jLabelLinkToLogin.setText("<html><u>Đăng nhập ngay!</u></html>");
         jLabelLinkToLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelLinkToLoginMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelLinkToLoginMousePressed(evt);
             }
         });
 
@@ -153,12 +153,6 @@ public class Register extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelLinkToLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLinkToLoginMouseClicked
-        main.setTitle("Đăng nhập");
-        Login jPanelLogin = new Login(main, jPanelAuth);
-        jPanelLoader.jPanelLoader(jPanelAuth, jPanelLogin);
-    }//GEN-LAST:event_jLabelLinkToLoginMouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String fullName = jTextField1.getText();
         String username = jTextField2.getText();
@@ -166,31 +160,37 @@ public class Register extends javax.swing.JPanel {
         String confirmPassword = new String(jPasswordField1.getPassword());
         String email = jTextField4.getText();
 
-    if (fullName.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (fullName.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    if (!password.equals(confirmPassword)) {
-        JOptionPane.showMessageDialog(this, "Mật khẩu không khớp!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không khớp!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    UsersDTO user = new UsersDTO();
-    user.setUserFullName(fullName);
-    user.setUserName(username);
-    user.setUserPassword(password);
-    user.setUserEmail(email);
-    user.setIsAdmin((byte) 0);
+        UsersDTO user = new UsersDTO();
+        user.setUserFullName(fullName);
+        user.setUserName(username);
+        user.setUserPassword(password);
+        user.setUserEmail(email);
+        user.setIsAdmin((byte) 0);
 
-    UsersBLL usersBLL = new UsersBLL();
-    String result = usersBLL.register(user);
+        UsersBLL usersBLL = new UsersBLL();
+        String result = usersBLL.register(user);
 
-    JOptionPane.showMessageDialog(this, result, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-    if (result.equals("Đăng ký thành công!")) {
-        resetFields();
-    }
+        JOptionPane.showMessageDialog(this, result, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        if (result.equals("Đăng ký thành công!")) {
+            resetFields();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabelLinkToLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLinkToLoginMousePressed
+        jFrameAuth.setTitle("Đăng nhập");
+        Login jPanelLogin = new Login(jFrameAuth, jPanelAuth);
+        jPanelLoader.jPanelLoader(jPanelAuth, jPanelLogin);
+    }//GEN-LAST:event_jLabelLinkToLoginMousePressed
 
         
     private void resetFields() {

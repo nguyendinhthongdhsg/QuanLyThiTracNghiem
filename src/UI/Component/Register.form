@@ -146,7 +146,7 @@
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;&#x110;&#x103;ng nh&#x1ead;p ngay!&lt;/u&gt;&lt;/html&gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelLinkToLoginMouseClicked"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelLinkToLoginMousePressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField1">
