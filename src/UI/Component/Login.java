@@ -5,6 +5,7 @@
 package UI.Component;
 
 import BLL.UsersBLL;
+import DTO.UsersDTO;
 import UI.JPanelLoader;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -201,8 +202,9 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelShowPasswordIconMouseReleased
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        String username = jTextField1.getText();
-        String password = new String(jPasswordField1.getPassword());
+
+    String username = jTextField1.getText();
+    String password = new String(jPasswordField1.getPassword());
 
     if (username.isEmpty() || password.isEmpty()) {
         JOptionPane.showMessageDialog(
@@ -212,20 +214,25 @@ public class Login extends javax.swing.JPanel {
                 JOptionPane.WARNING_MESSAGE
         );
     } else {
-        // Sử dụng BLL để xác thực người dùng
-        boolean isAuthenticated = UsersBLL.authenticateUser(username, password);
-        
-        if (isAuthenticated) {
-            System.out.println("name: " + username);
-            System.out.println("password: " + password);
+        UsersDTO user = UsersBLL.authenticateUser(username, password);
+
+        if (user != null) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            
-           // new AdminFrame().setVisible(true);
+
+            if (user.getIsAdmin() == 1) { 
+             // new AdminFrame().setVisible(true); 
+
+            } else {
+             // new UserFrame().setVisible(true); 
+            }
+
+
         } else {
-            // Nếu tên đăng nhập hoặc mật khẩu sai
+            // Nếu thông tin đăng nhập không đúng
             JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu sai!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     }//GEN-LAST:event_jButtonLoginActionPerformed
     
     

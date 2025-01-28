@@ -31,8 +31,8 @@ public class UsersBLL {
         return password; 
     }
     
-   public static boolean authenticateUser(String username, String password) {
-        UsersDTO user = UsersDAL.selectByAccount(username, password);
-        return user != null;
-    }
+   public static UsersDTO authenticateUser(String username, String password) {
+    return UsersDAL.selectByAccount(username, password);
+}
+
 }

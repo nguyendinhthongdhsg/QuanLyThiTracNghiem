@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Administrator/Desktop/QuanLyThiTracNghiem/src/UI/Component/Login.java</file>
+            <file>file:/C:/Users/Administrator/Desktop/QuanLyThiTracNghiem/src/DAL/UsersDAL.java</file>
             <file>file:/C:/Users/Administrator/Desktop/QuanLyThiTracNghiem/src/BLL/UsersBLL.java</file>
             <file>file:/C:/Users/Administrator/Desktop/QuanLyThiTracNghiem/src/config/MySQLConnection.java</file>
-            <file>file:/C:/Users/Administrator/Desktop/QuanLyThiTracNghiem/src/UI/Component/Register.java</file>
             <file>file:/C:/Users/Administrator/Desktop/QuanLyThiTracNghiem/src/DTO/UsersDTO.java</file>
         </group>
     </open-files>
