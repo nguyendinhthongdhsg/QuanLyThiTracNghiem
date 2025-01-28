@@ -4,10 +4,12 @@
  */
 package UI.Component;
 
+import BLL.UsersBLL;
 import UI.JPanelLoader;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -78,6 +80,11 @@ public class Login extends javax.swing.JPanel {
 
         jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonLogin.setText("Đăng nhập");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
 
         jCheckBoxRememberPassword.setText("Nhớ mật khẩu");
 
@@ -193,6 +200,35 @@ public class Login extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLabelShowPasswordIconMouseReleased
 
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        String username = jTextField1.getText();
+        String password = new String(jPasswordField1.getPassword());
+
+    if (username.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(
+                this,
+                "Tên đăng nhập hoặc mật khẩu không được bỏ trống!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+        );
+    } else {
+        // Sử dụng BLL để xác thực người dùng
+        boolean isAuthenticated = UsersBLL.authenticateUser(username, password);
+        
+        if (isAuthenticated) {
+            System.out.println("name: " + username);
+            System.out.println("password: " + password);
+            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            
+           // new AdminFrame().setVisible(true);
+        } else {
+            // Nếu tên đăng nhập hoặc mật khẩu sai
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu sai!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_jButtonLoginActionPerformed
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
