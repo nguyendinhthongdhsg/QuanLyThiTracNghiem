@@ -25,10 +25,10 @@ public class Login extends javax.swing.JPanel {
      */
     
     private boolean isShowPassword = false;
-    JPanelLoader jPanelLoader = new JPanelLoader();
+    private final JPanelLoader jPanelLoader = new JPanelLoader();
     
-    JFrame jFrameAuth;
-    JPanel jPanelAuth;
+    private JFrame jFrameAuth;
+    private JPanel jPanelAuth;
     
     public Login() {
         initComponents();
@@ -90,6 +90,8 @@ public class Login extends javax.swing.JPanel {
 
         jCheckBoxRememberPassword.setText("Nhớ mật khẩu");
 
+        jTextField1.setText("nguyendinhthong");
+
         jLabel4.setText("Tên đăng nhập");
 
         jLabelLinkToForgotPassword.setForeground(new java.awt.Color(255, 0, 0));
@@ -103,6 +105,8 @@ public class Login extends javax.swing.JPanel {
                 jLabelShowPasswordIconMouseReleased(evt);
             }
         });
+
+        jPasswordField1.setText("anhladuado1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -5,6 +5,7 @@
 package UI;
 
 import DTO.UsersDTO;
+import UI.Component.UserManagement;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -17,6 +18,8 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    private final JPanelLoader jPanelLoader = new JPanelLoader();
+    
     public MainFrame() {
     }
     
@@ -50,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonTestManagement = new javax.swing.JButton();
         jButtonExamManagement = new javax.swing.JButton();
         jButtonTakeTest = new javax.swing.JButton();
+        jButtonLogout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanelFunction = new javax.swing.JPanel();
         jLabelBackground = new javax.swing.JLabel();
@@ -100,6 +104,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonInformation.setText("Thông tin cá nhân");
 
         jButtonUserManagement.setText("Người dùng");
+        jButtonUserManagement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonUserManagementMouseReleased(evt);
+            }
+        });
 
         jButtonStatistical.setText("Thống kê");
         jButtonStatistical.setToolTipText("");
@@ -114,6 +123,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButtonTakeTest.setText("Làm bài thi");
 
+        jButtonLogout.setText("Đăng xuất");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -121,6 +132,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonTakeTest, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonExamManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonTestManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,7 +162,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButtonTestManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButtonExamManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,10 +203,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanelFunctionLayout.setVerticalGroup(
             jPanelFunctionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFunctionLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jLabelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -314,12 +325,22 @@ public class MainFrame extends javax.swing.JFrame {
         Image scaledImgInformation = imgInformation.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         jButtonInformation.setIcon(new ImageIcon(scaledImgInformation));
         
+        ImageIcon logout = new ImageIcon(getClass().getResource("/icon/logout.png"));
+        Image imgLogout = logout.getImage();
+        Image scaledImgLogout = imgLogout.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+        jButtonLogout.setIcon(new ImageIcon(scaledImgLogout));
+        
         ImageIcon backgroundFunction = new ImageIcon(getClass().getResource("/image/Logo.png"));
         Image imgBackgroundFunction = backgroundFunction.getImage();
         Image scaledBackgroundFunction = imgBackgroundFunction.getScaledInstance(jLabelBackground.getWidth(), 
                 jLabelBackground.getHeight(), Image.SCALE_SMOOTH);
         jLabelBackground.setIcon(new ImageIcon(scaledBackgroundFunction));
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButtonUserManagementMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUserManagementMouseReleased
+        UserManagement jPanelUserManagement = new UserManagement();
+        jPanelLoader.jPanelLoader(jPanelFunction, jPanelUserManagement);
+    }//GEN-LAST:event_jButtonUserManagementMouseReleased
 
     /**
      * @param args the command line arguments
@@ -359,6 +380,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExamManagement;
     private javax.swing.JButton jButtonInformation;
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonQuestionManagement;
     private javax.swing.JButton jButtonStatistical;
     private javax.swing.JButton jButtonTakeTest;

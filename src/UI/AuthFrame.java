@@ -18,7 +18,7 @@ public class AuthFrame extends javax.swing.JFrame {
      * Creates new form AuthFrame
      */
     
-    JPanelLoader jPanelLoader = new JPanelLoader();
+    private final JPanelLoader jPanelLoader = new JPanelLoader();
     
     public AuthFrame() {
         initComponents();

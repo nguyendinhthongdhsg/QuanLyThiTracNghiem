@@ -174,6 +174,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jButtonLogout" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
                               <Component id="jButtonTakeTest" min="-2" pref="194" max="-2" attributes="0"/>
                               <Component id="jButtonExamManagement" min="-2" pref="194" max="-2" attributes="0"/>
                               <Component id="jButtonTestManagement" min="-2" pref="194" max="-2" attributes="0"/>
@@ -206,7 +207,9 @@
                           <Component id="jButtonTestManagement" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jButtonExamManagement" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace pref="128" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jButtonLogout" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace pref="78" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -221,6 +224,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ng&#x1b0;&#x1edd;i d&#xf9;ng"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonUserManagementMouseReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonStatistical">
                   <Properties>
@@ -251,6 +257,11 @@
                 <Component class="javax.swing.JButton" name="jButtonTakeTest">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#xe0;m b&#xe0;i thi"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButtonLogout">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -304,11 +315,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jLabelBackground" max="32767" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelBackground" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>

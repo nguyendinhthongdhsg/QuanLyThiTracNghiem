@@ -21,9 +21,9 @@ public class Register extends javax.swing.JPanel {
      * Creates new form register
      */
     
-    JPanelLoader jPanelLoader = new JPanelLoader();
-    JFrame jFrameAuth;
-    JPanel jPanelAuth;    
+    private final JPanelLoader jPanelLoader = new JPanelLoader();
+    private JFrame jFrameAuth;
+    private JPanel jPanelAuth;    
     
     public Register() {
         initComponents();
