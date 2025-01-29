@@ -192,6 +192,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanelFunction.setBackground(new java.awt.Color(249, 249, 249));
 
+        jLabelBackground.setMinimumSize(new java.awt.Dimension(730, 573));
+
         javax.swing.GroupLayout jPanelFunctionLayout = new javax.swing.GroupLayout(jPanelFunction);
         jPanelFunction.setLayout(jPanelFunctionLayout);
         jPanelFunctionLayout.setHorizontalGroup(
