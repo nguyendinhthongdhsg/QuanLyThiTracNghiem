@@ -14,6 +14,15 @@
 
         public UsersDTO() {}
 
+        public UsersDTO(int userID, String userName, String userEmail, String userPassword, String userFullName, byte isAdmin) {
+            this.userID = userID;
+            this.userName = userName;
+            this.userEmail = userEmail;
+            this.userPassword = userPassword;
+            this.userFullName = userFullName;
+            this.isAdmin = isAdmin;
+        }
+        
         public int getUserID() {
             return userID;
         }

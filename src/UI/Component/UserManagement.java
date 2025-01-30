@@ -4,6 +4,11 @@
  */
 package UI.Component;
 
+import BLL.UsersBLL;
+import DTO.UsersDTO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -13,9 +18,17 @@ public class UserManagement extends javax.swing.JPanel {
     /**
      * Creates new form UserManagement
      */
+    
+    private DefaultTableModel tblModel;
+    private ArrayList<UsersDTO> userList = new ArrayList<>();
+    UsersBLL userBLL = new UsersBLL();
+    
     public UserManagement() {
         initComponents();
         initComponentCustom();
+        initTable();
+        userList = userBLL.getUserList();
+        loadDataToTable(userList);
     }
 
     /**
@@ -26,6 +39,30 @@ public class UserManagement extends javax.swing.JPanel {
     
     private void initComponentCustom() {
         jToolBarMenu.setFloatable(false);
+    }
+    
+    private void initTable() {
+        tblModel = new DefaultTableModel();
+        String[] headerTbl = new String[]{"ID người dùng", "Họ Tên", "Email", "Quyền"};
+        tblModel.setColumnIdentifiers(headerTbl);
+        jTableUser.setModel(tblModel);
+        jTableUser.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jTableUser.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTableUser.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTableUser.getColumnModel().getColumn(3).setPreferredWidth(30);
+    }
+    
+    private void loadDataToTable(ArrayList<UsersDTO> userList) {
+        try {
+            tblModel.setRowCount(0);
+            for (UsersDTO i : userList) {
+                tblModel.addRow(new Object[]{
+                    i.getUserID(), i.getUserFullName(), i.getUserEmail(), i.getIsAdmin() == 1 ? "Quản trị" : "Người dùng"
+                });
+            }
+        } 
+        catch (Exception e) {
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -42,6 +79,7 @@ public class UserManagement extends javax.swing.JPanel {
         jTextFieldSearch = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jTableUser = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -92,7 +130,7 @@ public class UserManagement extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "ID người dùng", "Tên đăng nhập", "Email", "Họ và tên" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,8 +139,8 @@ public class UserManagement extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jToolBarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -121,6 +159,38 @@ public class UserManagement extends javax.swing.JPanel {
         );
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTableUser.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID người dùng", "Họ và tên", "Email", "Quyền"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableUser.setRowHeight(30);
+        jTableUser.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableUser.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableUser.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTableUser);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,6 +226,7 @@ public class UserManagement extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableUser;
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JToolBar jToolBarMenu;
     // End of variables declaration//GEN-END:variables

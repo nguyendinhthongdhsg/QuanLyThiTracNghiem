@@ -2,6 +2,7 @@ package BLL;
 
 import DAL.UsersDAL;
 import DTO.UsersDTO;
+import java.util.ArrayList;
 
 public class UsersBLL {
     private final UsersDAL usersDAL = new UsersDAL();
@@ -25,6 +26,10 @@ public class UsersBLL {
         } else {
             return "Đăng ký thất bại. Vui lòng thử lại!";
         }
+    }
+    
+    public ArrayList<UsersDTO> getUserList() {
+        return usersDAL.getUserList();
     }
 
     private String hashPassword(String password) {
