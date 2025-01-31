@@ -6,8 +6,13 @@ package UI.Component;
 
 import BLL.UsersBLL;
 import DTO.UsersDTO;
+import UI.Add.UserAdd;
+import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -45,6 +50,8 @@ public class UserManagement extends javax.swing.JPanel {
         tblModel = new DefaultTableModel();
         String[] headerTbl = new String[]{"ID người dùng", "Họ Tên", "Email", "Quyền"};
         tblModel.setColumnIdentifiers(headerTbl);
+        JTableHeader header = jTableUser.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.BOLD, 12));
         jTableUser.setModel(tblModel);
         jTableUser.getColumnModel().getColumn(0).setPreferredWidth(10);
         jTableUser.getColumnModel().getColumn(1).setPreferredWidth(50);
@@ -97,6 +104,11 @@ public class UserManagement extends javax.swing.JPanel {
         jButtonAdd.setFocusable(false);
         jButtonAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonAddMouseReleased(evt);
+            }
+        });
         jToolBarMenu.add(jButtonAdd);
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -137,9 +149,9 @@ public class UserManagement extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap()
                 .addComponent(jToolBarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,6 +227,11 @@ public class UserManagement extends javax.swing.JPanel {
             jTextFieldSearch.setText("");
         }
     }//GEN-LAST:event_jTextFieldSearchFocusGained
+
+    private void jButtonAddMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAddMouseReleased
+        UserAdd userAdd = new UserAdd((JFrame) SwingUtilities.getWindowAncestor(this), true);
+        userAdd.setVisible(true);
+    }//GEN-LAST:event_jButtonAddMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
