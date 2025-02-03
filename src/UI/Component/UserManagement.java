@@ -231,6 +231,8 @@ public class UserManagement extends javax.swing.JPanel {
     private void jButtonAddMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAddMouseReleased
         UserAdd userAdd = new UserAdd((JFrame) SwingUtilities.getWindowAncestor(this), true);
         userAdd.setVisible(true);
+        userList = userBLL.getUserList();
+        loadDataToTable(userList);
     }//GEN-LAST:event_jButtonAddMouseReleased
 
 

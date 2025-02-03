@@ -28,6 +28,27 @@ public class UsersBLL {
         }
     }
     
+    public String add(UsersDTO user) {
+        if (user.getUserName().isEmpty() || user.getUserEmail().isEmpty() ||
+            user.getUserPassword().isEmpty() || user.getUserFullName().isEmpty()) {
+            return "Vui lòng điền đầy đủ thông tin!";
+        }
+        if (usersDAL.checkUserExists(user.getUserName())) {
+            return "Tên đăng nhập đã tồn tại!";
+        }
+
+        // Mã hóa mật khẩu trước khi lưu 
+        String hashedPassword = hashPassword(user.getUserPassword());
+        user.setUserPassword(hashedPassword);
+
+        // Lưu vào CSDL
+        if (usersDAL.registerUser(user)) {
+            return "Thêm thành công!";
+        } else {
+            return "Thêm thất bại. Vui lòng thử lại!";
+        }
+    }
+    
     public ArrayList<UsersDTO> getUserList() {
         return usersDAL.getUserList();
     }

@@ -4,6 +4,8 @@
  */
 package UI.Add;
 
+import BLL.UsersBLL;
+import DTO.UsersDTO;
 import javax.swing.JOptionPane;
 
 /**
@@ -220,12 +222,32 @@ public class UserAdd extends javax.swing.JDialog {
                 JOptionPane.WARNING_MESSAGE
             );
         } else {
-            JOptionPane.showMessageDialog(
-                this,
-                String.format("%s, %s, %s, %s, %s, %s", userName, userFullName, email, password, rePassword, decentralization),
-                "Thông báo",
-                JOptionPane.PLAIN_MESSAGE
-            );
+            if(!password.equals(rePassword)) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Mật khẩu nhập lại không khớp!",
+                    "Cảnh Báo",
+                    JOptionPane.WARNING_MESSAGE
+                );
+            } else {
+                UsersDTO newUser = new UsersDTO();
+                newUser.setUserName(userName);
+                newUser.setUserFullName(userFullName);
+                newUser.setUserEmail(email);
+                newUser.setUserPassword(password);
+                newUser.setIsAdmin((byte)(decentralization.equals("Người dùng") ? 0 : 1));
+                UsersBLL userBLL = new UsersBLL();
+                String result = userBLL.add(newUser);
+                JOptionPane.showMessageDialog(this, result, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                if (result.equals("Tạo mới thành công!")) {
+                    jTextFieldUserName.setText("");
+                    jTextFieldUserFullName.setText("");
+                    jTextFieldEmail.setText("");
+                    jPasswordFieldPassword.setText("");
+                    jPasswordFieldRePassword.setText("");
+                    jComboBoxDecentralization.setSelectedIndex(0);
+                }
+            }
         }
     }//GEN-LAST:event_jButton1MouseReleased
 

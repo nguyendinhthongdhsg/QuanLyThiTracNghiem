@@ -274,7 +274,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void setMenu(byte isAdmin) {
-        if(isAdmin != 0) {
+        if(isAdmin == 1) {
             
         } else {
             jButtonUserManagement.setVisible(false);
