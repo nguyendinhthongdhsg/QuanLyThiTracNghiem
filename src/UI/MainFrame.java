@@ -124,6 +124,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonTakeTest.setText("Làm bài thi");
 
         jButtonLogout.setText("Đăng xuất");
+        jButtonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonLogoutMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -343,6 +348,12 @@ public class MainFrame extends javax.swing.JFrame {
         UserManagement jPanelUserManagement = new UserManagement();
         jPanelLoader.jPanelLoader(jPanelFunction, jPanelUserManagement);
     }//GEN-LAST:event_jButtonUserManagementMouseReleased
+
+    private void jButtonLogoutMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLogoutMouseReleased
+        this.dispose();
+        AuthFrame authFrame = new AuthFrame();
+        authFrame.setVisible(true);
+    }//GEN-LAST:event_jButtonLogoutMouseReleased
 
     /**
      * @param args the command line arguments

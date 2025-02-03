@@ -213,7 +213,7 @@ public class Login extends javax.swing.JPanel {
         UsersDTO user = UsersBLL.authenticateUser(username, password);
 
         if (user != null) {
-            jFrameAuth.setVisible(false);
+            jFrameAuth.dispose();
             MainFrame mainFrame = new MainFrame(user);
             mainFrame.setVisible(true);
         } else {
