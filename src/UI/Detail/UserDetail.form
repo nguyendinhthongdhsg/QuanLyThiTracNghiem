@@ -109,16 +109,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButtonCancel" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" pref="260" max="32767" attributes="0"/>
                               <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" pref="260" max="32767" attributes="0"/>
                               <Component id="jPasswordFieldPassword" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextFieldUserName" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextFieldEmail" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextFieldUserFullName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jPasswordFieldRePassword" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jComboBoxDecentralization" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
@@ -146,10 +144,6 @@
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPasswordFieldPassword" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPasswordFieldRePassword" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -182,17 +176,7 @@
                 <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel10">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p l&#x1ea1;i m&#x1ead;t kh&#x1ea9;u"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordFieldPassword">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordFieldRePassword">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
