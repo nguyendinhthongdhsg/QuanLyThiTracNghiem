@@ -25,6 +25,34 @@ public class UsersDAL {
             return false;
         }
     }
+    
+    public boolean update(UsersDTO user) {
+        String sql = "UPDATE Users SET userEmail=?, userPassword=?, userFullName=?, isAdmin=? where userID=?";
+        try (Connection conn = MySQLConnection.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getUserEmail());
+            ps.setString(2, user.getUserPassword());
+            ps.setString(3, user.getUserFullName());
+            ps.setInt(4, user.getIsAdmin());
+            ps.setInt(5, user.getUserID());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean delete(int userID) {
+        String sql = "DELETE FROM Users where userID=?";
+        try (Connection conn = MySQLConnection.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userID);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public boolean checkUserExists(String userName) {
         String sql = "SELECT COUNT(*) FROM Users WHERE userName = ?";
@@ -54,6 +82,7 @@ public class UsersDAL {
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
                     user = new UsersDTO();
+                    user.setUserID(resultSet.getInt("userID"));
                     user.setUserName(resultSet.getString("userName"));
                     user.setUserEmail(resultSet.getString("userEmail"));
                     user.setUserPassword(resultSet.getString("userPassword"));

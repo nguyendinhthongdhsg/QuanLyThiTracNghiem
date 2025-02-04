@@ -210,11 +210,11 @@ public class Login extends javax.swing.JPanel {
                 JOptionPane.WARNING_MESSAGE
         );
     } else {
-        UsersDTO user = UsersBLL.authenticateUser(username, password);
+        UsersDTO userLogin = UsersBLL.authenticateUser(username, password);
 
-        if (user != null) {
+        if (userLogin != null) {
             jFrameAuth.dispose();
-            MainFrame mainFrame = new MainFrame(user);
+            MainFrame mainFrame = new MainFrame(userLogin);
             mainFrame.setVisible(true);
         } else {
             // Nếu thông tin đăng nhập không đúng

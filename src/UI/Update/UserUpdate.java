@@ -17,9 +17,18 @@ public class UserUpdate extends javax.swing.JDialog {
     /**
      * Creates new form UserUpdate
      */
+    private UsersDTO oldUser;
+    
     public UserUpdate(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public UserUpdate(java.awt.Frame parent, boolean modal, UsersDTO oldUser) {
+        super(parent, modal);
+        this.oldUser = oldUser;
+        initComponents();
+        display();
     }
 
     /**
@@ -47,8 +56,8 @@ public class UserUpdate extends javax.swing.JDialog {
         jPasswordFieldRePassword = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxDecentralization = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,21 +99,21 @@ public class UserUpdate extends javax.swing.JDialog {
 
         jComboBoxDecentralization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Người dùng", "Quản trị" }));
 
-        jButton1.setBackground(new java.awt.Color(0, 51, 102));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Thêm");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonUpdate.setBackground(new java.awt.Color(0, 51, 102));
+        jButtonUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonUpdate.setText("Sửa");
+        jButtonUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
+                jButtonUpdateMouseReleased(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Hủy");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonCancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonCancel.setText("Hủy");
+        jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton2MouseReleased(evt);
+                jButtonCancelMouseReleased(evt);
             }
         });
 
@@ -115,7 +124,7 @@ public class UserUpdate extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -129,7 +138,7 @@ public class UserUpdate extends javax.swing.JDialog {
                             .addComponent(jTextFieldUserFullName)
                             .addComponent(jPasswordFieldRePassword)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jComboBoxDecentralization, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -162,8 +171,8 @@ public class UserUpdate extends javax.swing.JDialog {
                 .addComponent(jComboBoxDecentralization, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -194,9 +203,19 @@ public class UserUpdate extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+    private void display() {
+        jTextFieldUserName.setText(oldUser.getUserName());
+        jTextFieldUserFullName.setText(oldUser.getUserFullName());
+        jTextFieldEmail.setText(oldUser.getUserEmail());
+        jPasswordFieldPassword.setText(oldUser.getUserPassword());
+        jPasswordFieldRePassword.setText(oldUser.getUserPassword());
+        jComboBoxDecentralization.setSelectedIndex(oldUser.getIsAdmin() == 1 ? 1 : 0);
+    }
+    
+    private void jButtonUpdateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseReleased
         String userName = (String) jTextFieldUserName.getText();
         String userFullName = (String) jTextFieldUserFullName.getText();
         String email = (String) jTextFieldEmail.getText();
@@ -222,29 +241,22 @@ public class UserUpdate extends javax.swing.JDialog {
                 );
             } else {
                 UsersDTO newUser = new UsersDTO();
+                newUser.setUserID(oldUser.getUserID());
                 newUser.setUserName(userName);
                 newUser.setUserFullName(userFullName);
                 newUser.setUserEmail(email);
                 newUser.setUserPassword(password);
                 newUser.setIsAdmin((byte)(decentralization.equals("Người dùng") ? 0 : 1));
                 UsersBLL userBLL = new UsersBLL();
-                String result = userBLL.add(newUser);
+                String result = userBLL.update(newUser);
                 JOptionPane.showMessageDialog(this, result, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                if (result.equals("Tạo mới thành công!")) {
-                    jTextFieldUserName.setText("");
-                    jTextFieldUserFullName.setText("");
-                    jTextFieldEmail.setText("");
-                    jPasswordFieldPassword.setText("");
-                    jPasswordFieldRePassword.setText("");
-                    jComboBoxDecentralization.setSelectedIndex(0);
-                }
             }
         }
-    }//GEN-LAST:event_jButton1MouseReleased
+    }//GEN-LAST:event_jButtonUpdateMouseReleased
 
-    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+    private void jButtonCancelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelMouseReleased
         this.dispose();
-    }//GEN-LAST:event_jButton2MouseReleased
+    }//GEN-LAST:event_jButtonCancelMouseReleased
 
     /**
      * @param args the command line arguments
@@ -289,8 +301,8 @@ public class UserUpdate extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxDecentralization;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

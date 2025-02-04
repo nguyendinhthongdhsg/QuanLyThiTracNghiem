@@ -7,9 +7,12 @@ package UI.Component;
 import BLL.UsersBLL;
 import DTO.UsersDTO;
 import UI.Add.UserAdd;
+import UI.Detail.UserDetail;
+import UI.Update.UserUpdate;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -26,9 +29,11 @@ public class UserManagement extends javax.swing.JPanel {
     
     private DefaultTableModel tblModel;
     private ArrayList<UsersDTO> userList = new ArrayList<>();
-    UsersBLL userBLL = new UsersBLL();
+    private final UsersBLL userBLL = new UsersBLL();
+    private UsersDTO userLogin;
     
-    public UserManagement() {
+    public UserManagement(UsersDTO userLogin) {
+        this.userLogin = userLogin;
         initComponents();
         initComponentCustom();
         initTable();
@@ -80,9 +85,9 @@ public class UserManagement extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jToolBarMenu = new javax.swing.JToolBar();
         jButtonAdd = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonDetail = new javax.swing.JButton();
         jTextFieldSearch = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -111,29 +116,44 @@ public class UserManagement extends javax.swing.JPanel {
         });
         jToolBarMenu.add(jButtonAdd);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
-        jButton3.setText("Sửa");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBarMenu.add(jButton3);
+        jButtonUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
+        jButtonUpdate.setText("Sửa");
+        jButtonUpdate.setFocusable(false);
+        jButtonUpdate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonUpdate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonUpdateMouseReleased(evt);
+            }
+        });
+        jToolBarMenu.add(jButtonUpdate);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
-        jButton4.setText("Xóa");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBarMenu.add(jButton4);
+        jButtonDelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
+        jButtonDelete.setText("Xóa");
+        jButtonDelete.setFocusable(false);
+        jButtonDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonDelete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonDeleteMouseReleased(evt);
+            }
+        });
+        jToolBarMenu.add(jButtonDelete);
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/detail.png"))); // NOI18N
-        jButton5.setText("Chi tiết");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBarMenu.add(jButton5);
+        jButtonDetail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/detail.png"))); // NOI18N
+        jButtonDetail.setText("Chi tiết");
+        jButtonDetail.setFocusable(false);
+        jButtonDetail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonDetail.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDetail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonDetailMouseReleased(evt);
+            }
+        });
+        jToolBarMenu.add(jButtonDetail);
 
         jTextFieldSearch.setText("Nhập nội dung tìm kiếm...");
         jTextFieldSearch.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -235,12 +255,75 @@ public class UserManagement extends javax.swing.JPanel {
         loadDataToTable(userList);
     }//GEN-LAST:event_jButtonAddMouseReleased
 
+    private void jButtonUpdateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseReleased
+        int indexSelectedRow = jTableUser.getSelectedRow();
+        if(indexSelectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Vui lòng chọn người dùng muốn chỉnh sửa thông tin!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        } else {
+            UsersDTO oldUser = userList.get(indexSelectedRow);
+            UserUpdate userUpdate = new UserUpdate((JFrame) SwingUtilities.getWindowAncestor(this), true, oldUser);
+            userUpdate.setVisible(true);
+            userList = userBLL.getUserList();
+            loadDataToTable(userList);
+        }
+    }//GEN-LAST:event_jButtonUpdateMouseReleased
+
+    private void jButtonDeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteMouseReleased
+        int indexSelectedRow = jTableUser.getSelectedRow();
+        if(indexSelectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Vui lòng chọn người dùng muốn xóa!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
+        else if(userList.get(indexSelectedRow).getUserID() == userLogin.getUserID()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Người dùng này đang đăng nhập, không thể xóa!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
+        else {
+            int checkValueChoice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa người dùng này?",
+                            "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+            if(checkValueChoice == JOptionPane.YES_OPTION) {
+                UsersDTO user = userList.get(indexSelectedRow);
+                UserDetail userDetail = new UserDetail((JFrame) SwingUtilities.getWindowAncestor(this), true, user);
+                userDetail.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jButtonDeleteMouseReleased
+
+    private void jButtonDetailMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDetailMouseReleased
+        int indexSelectedRow = jTableUser.getSelectedRow();
+        if(indexSelectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Vui lòng chọn người dùng muốn xem thông tin!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        } else {
+            UsersDTO user = userList.get(indexSelectedRow);
+            UserDetail userDetail = new UserDetail((JFrame) SwingUtilities.getWindowAncestor(this), true, user);
+            userDetail.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonDetailMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonDetail;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

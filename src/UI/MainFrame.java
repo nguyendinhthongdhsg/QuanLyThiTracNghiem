@@ -19,15 +19,17 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     private final JPanelLoader jPanelLoader = new JPanelLoader();
-    
+    private UsersDTO userLogin;
+            
     public MainFrame() {
     }
     
-    public MainFrame(UsersDTO user) {
+    public MainFrame(UsersDTO userLogin) {
+        this.userLogin = userLogin;
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-        setFullNameUser(user.getUserFullName());
-        setMenu(user.getIsAdmin());
+        setFullNameUser(userLogin.getUserFullName());
+        setMenu(userLogin.getIsAdmin());
     }
 
     /**
@@ -345,7 +347,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButtonUserManagementMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUserManagementMouseReleased
-        UserManagement jPanelUserManagement = new UserManagement();
+        UserManagement jPanelUserManagement = new UserManagement(userLogin);
         jPanelLoader.jPanelLoader(jPanelFunction, jPanelUserManagement);
     }//GEN-LAST:event_jButtonUserManagementMouseReleased
 
