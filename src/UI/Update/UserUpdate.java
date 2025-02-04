@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package UI.Add;
+package UI.Update;
 
 import BLL.UsersBLL;
 import DTO.UsersDTO;
@@ -12,18 +12,14 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class UserAdd extends javax.swing.JDialog {
+public class UserUpdate extends javax.swing.JDialog {
 
     /**
-     * Creates new form UserAdd
+     * Creates new form UserUpdate
      */
-    public UserAdd(java.awt.Frame parent, boolean modal) {
+    public UserUpdate(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
-
-    public UserAdd() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -40,19 +36,19 @@ public class UserAdd extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jPasswordFieldPassword = new javax.swing.JPasswordField();
-        jPasswordFieldRePassword = new javax.swing.JPasswordField();
         jTextFieldUserName = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jTextFieldUserFullName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jPasswordFieldPassword = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        jPasswordFieldRePassword = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxDecentralization = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,7 +58,7 @@ public class UserAdd extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THÊM NGƯỜI DÙNG");
+        jLabel1.setText("SỬA NGƯỜI DÙNG");
         jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -73,14 +69,14 @@ public class UserAdd extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Tên đăng nhập");
+
+        jTextFieldUserName.setFocusable(false);
 
         jLabel5.setText("Họ và tên");
 
@@ -89,6 +85,10 @@ public class UserAdd extends javax.swing.JDialog {
         jLabel8.setText("Mật khẩu");
 
         jLabel10.setText("Nhập lại mật khẩu");
+
+        jLabel2.setText("Phân quyền");
+
+        jComboBoxDecentralization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Người dùng", "Quản trị" }));
 
         jButton1.setBackground(new java.awt.Color(0, 51, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -107,10 +107,6 @@ public class UserAdd extends javax.swing.JDialog {
                 jButton2MouseReleased(evt);
             }
         });
-
-        jLabel2.setText("Phân quyền");
-
-        jComboBoxDecentralization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Người dùng", "Quản trị" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -198,12 +194,7 @@ public class UserAdd extends javax.swing.JDialog {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
-        this.dispose();
-    }//GEN-LAST:event_jButton2MouseReleased
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         String userName = (String) jTextFieldUserName.getText();
@@ -212,9 +203,9 @@ public class UserAdd extends javax.swing.JDialog {
         String password = (String) jPasswordFieldPassword.getText();
         String rePassword = (String) jPasswordFieldRePassword.getText();
         String decentralization = (String) jComboBoxDecentralization.getSelectedItem();
-        
+
         if(userName.isBlank() && userFullName.isBlank() && email.isBlank()
-                && password.isBlank() && rePassword.isBlank() && decentralization.isBlank()) {
+            && password.isBlank() && rePassword.isBlank() && decentralization.isBlank()) {
             JOptionPane.showMessageDialog(
                 this,
                 "Vui lòng nhập đầy đủ thông tin!",
@@ -251,6 +242,10 @@ public class UserAdd extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton1MouseReleased
 
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        this.dispose();
+    }//GEN-LAST:event_jButton2MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -268,20 +263,20 @@ public class UserAdd extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UserAdd dialog = new UserAdd(new javax.swing.JFrame(), true);
+                UserUpdate dialog = new UserUpdate(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
