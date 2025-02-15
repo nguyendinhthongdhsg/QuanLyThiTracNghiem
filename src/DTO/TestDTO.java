@@ -18,6 +18,21 @@ public class TestDTO {
     private int testStatus;
 
     public TestDTO() {}
+    public TestDTO(int testID, String testCode, String testTitle, int testTime, int tpID, 
+               int numEasy, int numMedium, int numDiff, int testLimit, 
+               String testDate, int testStatus) {
+    this.testID = testID;
+    this.testCode = testCode;
+    this.testTitle = testTitle;
+    this.testTime = testTime;
+    this.tpID = tpID;
+    this.numEasy = numEasy;
+    this.numMedium = numMedium;
+    this.numDiff = numDiff;
+    this.testLimit = testLimit;
+    this.testDate = testDate;
+    this.testStatus = testStatus;
+}
 
     // Getters and setters
     public int getTestID() {

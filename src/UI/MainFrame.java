@@ -5,6 +5,10 @@
 package UI;
 
 import DTO.UsersDTO;
+import UI.Component.ExamManagementUI;
+import UI.Component.QuestionManagementUI;
+import UI.Component.TestManagementUI;
+import UI.Component.TopicsManagement;
 import UI.Component.UserManagement;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -116,12 +120,32 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonStatistical.setToolTipText("");
 
         jButtonQuestionManagement.setText("Câu hỏi");
+        jButtonQuestionManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonQuestionManagementActionPerformed(evt);
+            }
+        });
 
         jButtonTopicManagement.setText("Chủ đề");
+        jButtonTopicManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTopicManagementActionPerformed(evt);
+            }
+        });
 
         jButtonTestManagement.setText("Bài thi");
+        jButtonTestManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTestManagementActionPerformed(evt);
+            }
+        });
 
         jButtonExamManagement.setText("Đề thi");
+        jButtonExamManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExamManagementActionPerformed(evt);
+            }
+        });
 
         jButtonTakeTest.setText("Làm bài thi");
 
@@ -356,6 +380,30 @@ public class MainFrame extends javax.swing.JFrame {
         AuthFrame authFrame = new AuthFrame();
         authFrame.setVisible(true);
     }//GEN-LAST:event_jButtonLogoutMouseReleased
+
+    private void jButtonTopicManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTopicManagementActionPerformed
+        // TODO add your handling code here:
+        TopicsManagement jPanelTopicsManagement = new TopicsManagement();
+        jPanelLoader.jPanelLoader(jPanelFunction, jPanelTopicsManagement);
+    }//GEN-LAST:event_jButtonTopicManagementActionPerformed
+
+    private void jButtonQuestionManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuestionManagementActionPerformed
+        // TODO add your handling code here:
+        QuestionManagementUI jPanelQuestionManagement = new QuestionManagementUI();
+        jPanelLoader.jPanelLoader(jPanelFunction, jPanelQuestionManagement);
+    }//GEN-LAST:event_jButtonQuestionManagementActionPerformed
+
+    private void jButtonTestManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestManagementActionPerformed
+        // TODO add your handling code here:
+        TestManagementUI jPanelTestManagementUI  = new TestManagementUI();
+        jPanelLoader.jPanelLoader(jPanelFunction, jPanelTestManagementUI);
+    }//GEN-LAST:event_jButtonTestManagementActionPerformed
+
+    private void jButtonExamManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExamManagementActionPerformed
+        // TODO add your handling code here:
+        ExamManagementUI jPanelExamManagementUI  = new ExamManagementUI();
+        jPanelLoader.jPanelLoader(jPanelFunction, jPanelExamManagementUI);
+    }//GEN-LAST:event_jButtonExamManagementActionPerformed
 
     /**
      * @param args the command line arguments

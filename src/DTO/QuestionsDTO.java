@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DTO;
-
+import java.util.List;
 public class QuestionsDTO {
     private int qID;
     private String qContent;
@@ -11,9 +11,19 @@ public class QuestionsDTO {
     private int qTopicID;
     private String qLevel;
     private byte qStatus;
-
+    private List<AnswersDTO> answers;
     public QuestionsDTO() {}
-
+    public QuestionsDTO(int qID, String qContent, String qPictures, int qTopicID, String qLevel, byte qStatus, List<AnswersDTO> answers) {
+        this.qID = qID;
+        this.qContent = qContent;
+        this.qPictures = qPictures;
+        this.qTopicID = qTopicID;
+        this.qLevel = qLevel;
+        this.qStatus = qStatus;
+        this.answers = answers;
+    }
+    
+    
     // Getters and setters
     public int getqID() {
         return qID;
@@ -61,6 +71,13 @@ public class QuestionsDTO {
 
     public void setqStatus(byte qStatus) {
         this.qStatus = qStatus;
+    }
+    public List<AnswersDTO> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<AnswersDTO> answers) {
+        this.answers = answers;
     }
 }
 

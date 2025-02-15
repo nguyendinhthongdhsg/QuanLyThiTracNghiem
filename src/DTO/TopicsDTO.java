@@ -9,8 +9,15 @@ public class TopicsDTO {
     private String tpTitle;
     private int tpParent;
     private byte tpStatus;
-
+    
+    
     public TopicsDTO() {}
+    public TopicsDTO(int tpID, String tpTitle, int tpParent, byte tpStatus) {
+        this.tpID = tpID;
+        this.tpTitle = tpTitle;
+        this.tpParent = tpParent;
+        this.tpStatus = tpStatus;
+    }
     // Getters and setters
     public int getTpID() {
         return tpID;

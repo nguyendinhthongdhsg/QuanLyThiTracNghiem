@@ -1,16 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
 public class ExamsDTO {
+    private int examId;  
     private String testCode;
     private int exOrder;
     private String exCode;
     private String exQuesIDs;
 
     public ExamsDTO() {}
+
+    public ExamsDTO(int examId, String testCode, int exOrder, String exCode, String exQuesIDs) {
+        this.examId = examId;
+        this.testCode = testCode;
+        this.exOrder = exOrder;
+        this.exCode = exCode;
+        this.exQuesIDs = exQuesIDs;
+    }
+
+    public int getExamId() {
+        return examId;
+    }
+
+    public void setExamId(int examId) {
+        this.examId = examId;
+    }
 
     public String getTestCode() {
         return testCode;
@@ -44,4 +57,3 @@ public class ExamsDTO {
         this.exQuesIDs = exQuesIDs;
     }
 }
-
