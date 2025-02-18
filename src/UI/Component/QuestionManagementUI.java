@@ -184,9 +184,7 @@ public class QuestionManagementUI extends JPanel {
         }
     }
     // render ảnh
-
     static class ImageRenderer extends JLabel implements TableCellRenderer {
-
         public ImageRenderer() {
             setHorizontalAlignment(JLabel.CENTER);
         }
@@ -312,11 +310,11 @@ public class QuestionManagementUI extends JPanel {
             return;
         }
         int topicID = topicsBLL.getAllTopics().get(topicIndex).getTpID();
-        String imagePath = selectedImagePath.isEmpty() ? null : selectedImagePath;
+        String imagePath = (selectedImagePath == null || selectedImagePath.isEmpty()) ? null : selectedImagePath;
         QuestionsDTO question = new QuestionsDTO(0, content, imagePath, topicID, level, (byte) 1, new ArrayList<>());
         if (questionsBLL.addQuestion(question)) {
-            reloadUI();
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            reloadUI();
         } else {
             JOptionPane.showMessageDialog(this, "Lỗi!");
         }
@@ -351,8 +349,8 @@ public class QuestionManagementUI extends JPanel {
 
         QuestionsDTO question = new QuestionsDTO(id, content, imagePath, topicID, level, (byte) 1, new ArrayList<>());
         if (questionsBLL.updateQuestion(question)) {
-            reloadUI();
             JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+            reloadUI();
         } else {
             JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật!");
         }

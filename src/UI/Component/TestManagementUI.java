@@ -73,16 +73,22 @@ public class TestManagementUI extends JPanel {
         JPanel panelButtons = new JPanel();
         
         btnAdd = new JButton("Thêm bài thi");
+        btnAdd.setIcon(new ImageIcon(getClass().getResource("/icon/add.png")));
         btnDelete = new JButton("Xóa bài thi");
+        btnDelete.setIcon(new ImageIcon(getClass().getResource("/icon/delete.png")));
         btnUpdate = new JButton("Cập nhật");
+        btnUpdate.setIcon(new ImageIcon(getClass().getResource("/icon/edit.png")));
         btnSearch = new JButton("Tìm kiếm");
+        btnSearch.setIcon(new ImageIcon(getClass().getResource("/icon/search.png")));
         btnReload = new JButton("Tải lại");
-
+        btnReload.setIcon(new ImageIcon(getClass().getResource("/icon/reload.png")));
         panelButtons.add(btnAdd);
         panelButtons.add(btnDelete);
+        panelButtons.add(btnUpdate);
         panelButtons.add(btnSearch);
         panelButtons.add(btnReload);
-        panelButtons.add(btnUpdate);
+
+
         
         // Cập nhật bảng hiển thị bài thi, thêm cột "Số câu hỏi"
         String[] columnNames = {"ID", "Mã bài thi", "Tên bài thi", "Chủ đề", "Thời gian", "Số câu hỏi", "Số câu dễ", "Số câu TB", "Số câu khó", "Lượt làm bài", "Ngày thi"};

@@ -36,15 +36,11 @@ public ExamUI(int testID) {
         questionsBLL = new QuestionsBLL();
         answersBLL = new AnswersBLL();
         testBLL = new TestBLL();
-
         TestDTO test = testBLL.getTestByID(testID);
-
         this.remainingTime = test.getTestTime() * 60;
-
         List<ExamsDTO> exams = examsBLL.getExamsByTestCode(test.getTestCode());
         questions = new ArrayList<>();
         allAnswers = new ArrayList<>();
-
         for (ExamsDTO exam : exams) {
             String[] questionIDs = exam.getExQuestIDs().split(",");
             for (String qID : questionIDs) {
@@ -56,7 +52,6 @@ public ExamUI(int testID) {
                 }
             }
         }
-
         initComponents(test);
         startTimer();
     }
@@ -128,22 +123,17 @@ private void initComponents(TestDTO test) {
 
 private void showQuestion(int index) {
     questionPanel.removeAll();
-
     QuestionsDTO question = questions.get(index);
     List<AnswersDTO> answerList = allAnswers.get(index);
-
     String questionText = question.getqContent();
     String questionImage = question.getqPictures();
-
     // Tạo JLabel cho câu hỏi và thay đổi phông chữ và màu nền
     JLabel questionLabel = new JLabel("<html><b>" + (index + 1) + ". " + questionText + "</b></html>");
     questionLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
     questionLabel.setBackground(new Color(230, 230, 255)); 
     questionLabel.setOpaque(true); 
-
     questionPanel.setLayout(new BoxLayout(questionPanel, BoxLayout.Y_AXIS));
     questionPanel.setBackground(Color.WHITE);
-
     // Nếu có ảnh câu hỏi
     if (questionImage != null && !questionImage.isEmpty()) {
         try {
@@ -172,14 +162,11 @@ private void showQuestion(int index) {
         questionContainer.add(questionLabel);  
         questionPanel.add(questionContainer);  
     }
-
     JPanel answerPanel = new JPanel(new GridLayout(2, 2));
     answerPanel.setBackground(Color.WHITE); 
     answerPanel.setPreferredSize(new Dimension(400, 250));  
-
     JRadioButton[] answerButtons = new JRadioButton[answerList.size()];
     ButtonGroup group = new ButtonGroup();
-
     for (int i = 0; i < answerList.size(); i++) {
         final int answerIndex = i;  
         String answerContent = answerList.get(answerIndex).getAwContent();

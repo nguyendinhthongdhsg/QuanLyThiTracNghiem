@@ -65,29 +65,26 @@ public class QuestionsDAL {
 
 
     // Thêm mới câu hỏi
-    public int addQuestion(QuestionsDTO question) {
+   public boolean addQuestion(QuestionsDTO question) {
     String sql = "INSERT INTO questions (qContent, qPictures, qTopicID, qLevel, qStatus) VALUES (?, ?, ?, ?, ?)";
+    
     try (Connection conn = MySQLConnection.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
         ps.setString(1, question.getqContent());
-        ps.setString(2, question.getqPictures() != null ? question.getqPictures() : null); 
+        ps.setString(2, question.getqPictures() != null ? question.getqPictures() : null);
         ps.setInt(3, question.getqTopicID());
         ps.setString(4, question.getqLevel());
         ps.setByte(5, question.getqStatus());
 
-        int affectedRows = ps.executeUpdate();
-        if (affectedRows > 0) {
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                return generatedKeys.getInt(1);
-            }
-        }
+        return ps.executeUpdate() > 0;  
     } catch (SQLException e) {
         e.printStackTrace();
+        return false;  
     }
-    return -1;
 }
+
+
 
 
 
