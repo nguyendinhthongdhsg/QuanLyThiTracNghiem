@@ -23,7 +23,13 @@ public class QuestionsDTO {
         this.answers = answers;
     }
     
-    
+    public QuestionsDTO(int qID, String qContent, String qPictures, String qLevel) {
+    this.qID = qID;
+    this.qContent = qContent;
+    this.qPictures = qPictures;
+    this.qLevel = qLevel;
+}
+
     // Getters and setters
     public int getqID() {
         return qID;

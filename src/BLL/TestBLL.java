@@ -2,6 +2,10 @@ package BLL;
 
 import DAL.TestDAL;
 import DTO.TestDTO;
+import config.MySQLConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TestBLL {
@@ -23,6 +27,10 @@ public class TestBLL {
     public List<TestDTO> getTestsByTopicID(int topicID) {
         return testDAL.getTestsByTopicID(topicID);
     }
+
+    public TestDTO getTestByCode(String testCode) {
+    return testDAL.getTestByCode(testCode);
+}
 
     // Kiểm tra xem chủ đề có tồn tại không
     public boolean isTopicExist(int topicID) {

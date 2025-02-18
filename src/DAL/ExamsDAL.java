@@ -5,6 +5,7 @@ import config.MySQLConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ExamsDAL {
     public List<ExamsDTO> getAllExams() {
@@ -39,14 +40,17 @@ public class ExamsDAL {
     }
 
     public boolean addExam(ExamsDTO exam) {
-        String sql = "INSERT INTO exams (examId, testCode, exOrder, exCode, ex_quesIDs) VALUES (?, ?, ?, ?, ?)";
+         if (isExamCodeExists(exam.getExCode())) {
+        JOptionPane.showMessageDialog(null, "Mã đề thi đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+        String sql = "INSERT INTO exams (testCode, exOrder, exCode, ex_quesIDs) VALUES (?, ?, ?, ?)";
         try (Connection conn = MySQLConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, exam.getExamId());
-            ps.setString(2, exam.getTestCode());
-            ps.setInt(3, exam.getExOrder());
-            ps.setString(4, exam.getExCode());
-            ps.setString(5, exam.getExQuesIDs());
+            ps.setString(1, exam.getTestCode());
+            ps.setString(2, exam.getExOrder());
+            ps.setString(3, exam.getExCode());
+            ps.setString(4, exam.getExQuestIDs());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,11 +61,11 @@ public class ExamsDAL {
     public boolean updateExam(ExamsDTO exam) {
         String sql = "UPDATE exams SET testCode = ?, exOrder = ?, exCode = ?, ex_quesIDs = ? WHERE examId = ?";
         try (Connection conn = MySQLConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, exam.getTestCode());
-            ps.setInt(2, exam.getExOrder());
+            ps.setString(2, exam.getExOrder());
             ps.setString(3, exam.getExCode());
-            ps.setString(4, exam.getExQuesIDs());
+            ps.setString(4, exam.getExQuestIDs());
             ps.setInt(5, exam.getExamId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -104,9 +108,52 @@ public class ExamsDAL {
         return new ExamsDTO(
                 rs.getInt("examId"),
                 rs.getString("testCode"),
-                rs.getInt("exOrder"),
+                rs.getString("exOrder"),
                 rs.getString("exCode"),
                 rs.getString("ex_quesIDs")
         );
     }
+    
+    public boolean isExamCodeExists(String exCode) {
+        String query = "SELECT COUNT(*) FROM exams WHERE exCode = ?";
+            try (Connection conn = MySQLConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, exCode);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public List<ExamsDTO> getExamsByTestCode(String testCode) {
+        List<ExamsDTO> exams = new ArrayList<>();
+        String sql = "SELECT * FROM exams WHERE testCode = ?";
+
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, testCode);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    ExamsDTO exam = new ExamsDTO(
+                        rs.getInt("examId"),
+                        rs.getString("testCode"),
+                        rs.getString("exOrder"),
+                        rs.getString("exCode"),
+                        rs.getString("ex_quesIDs")
+                    );
+                    exams.add(exam);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exams;
+    }
+
+
+    
 }

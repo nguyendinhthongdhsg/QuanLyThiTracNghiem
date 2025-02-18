@@ -65,7 +65,7 @@ public class AnswersDAL {
         ps.setInt(2, questionID);
         ps.setString(3, answer.getAwContent());
         ps.setString(4, answer.getAwPictures());
-        ps.setBoolean(5, answer.isIsRight());
+        ps.setBoolean(5, answer.isRight());
         ps.setByte(6, answer.getAwStatus());
         return ps.executeUpdate() > 0;
     } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class AnswersDAL {
          PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setString(1, answer.getAwContent());
         ps.setString(2, answer.getAwPictures());
-        ps.setBoolean(3, answer.isIsRight());
+        ps.setBoolean(3, answer.isRight());
         ps.setByte(4, answer.getAwStatus());
         ps.setInt(5, answer.getAwID());
         ps.setInt(6, questionID);  

@@ -14,6 +14,14 @@ public class AnswersDTO {
 
     public AnswersDTO() {}
 
+    public AnswersDTO(int awID, int qID, String awContent, String awPictures, boolean isRight) {
+    this.awID = awID;
+    this.qID = qID;
+    this.awContent = awContent;
+    this.awPictures = awPictures;
+    this.isRight = isRight;
+}
+
     // Getters and setters
     public int getAwID() {
         return awID;
@@ -47,7 +55,7 @@ public class AnswersDTO {
         this.awPictures = awPictures;
     }
 
-    public boolean isIsRight() {
+    public boolean isRight() {
         return isRight;
     }
 

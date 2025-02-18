@@ -138,7 +138,7 @@ public class AnswersManagement extends JDialog {
         tableModel.setRowCount(0);
         List<AnswersDTO> answers = answersBLL.getAnswersByQuestionID(questionID);
         for (AnswersDTO answer : answers) {
-            tableModel.addRow(new Object[]{answer.getAwID(), answer.getAwContent(), answer.getAwPictures(), answer.isIsRight()});
+            tableModel.addRow(new Object[]{answer.getAwID(), answer.getAwContent(), answer.getAwPictures(), answer.isRight()});
         }
         displayImage(tblAnswers.getRowCount() > 0 ? (String) tableModel.getValueAt(0, 2) : null);
     }

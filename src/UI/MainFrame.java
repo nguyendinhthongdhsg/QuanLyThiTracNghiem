@@ -6,6 +6,7 @@ package UI;
 
 import DTO.UsersDTO;
 import UI.Component.ExamManagementUI;
+import UI.Component.ExamSelectionUI;
 import UI.Component.QuestionManagementUI;
 import UI.Component.TestManagementUI;
 import UI.Component.TopicsManagement;
@@ -148,6 +149,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButtonTakeTest.setText("Làm bài thi");
+        jButtonTakeTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTakeTestActionPerformed(evt);
+            }
+        });
 
         jButtonLogout.setText("Đăng xuất");
         jButtonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -405,6 +411,13 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelLoader.jPanelLoader(jPanelFunction, jPanelExamManagementUI);
     }//GEN-LAST:event_jButtonExamManagementActionPerformed
 
+    private void jButtonTakeTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTakeTestActionPerformed
+        // TODO add your handling code here:
+                ExamSelectionUI jPanelExamSelectionUI  = new ExamSelectionUI();
+        jPanelLoader.jPanelLoader(jPanelFunction, jPanelExamSelectionUI);
+    }//GEN-LAST:event_jButtonTakeTestActionPerformed
+                                            
+     
     /**
      * @param args the command line arguments
      */

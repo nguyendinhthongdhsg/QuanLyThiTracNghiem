@@ -208,4 +208,23 @@ public class TestDAL {
         test.setTestStatus(rs.getInt("testStatus"));
         return test;
     }
+    
+public TestDTO getTestByCode(String testCode) {
+    TestDTO test = null;
+    String sql = "SELECT * FROM test WHERE testCode = ?";
+    try (Connection conn = MySQLConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, testCode);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                test = mapResultSetToTestDTO(rs);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return test;
+} 
+
+
 }

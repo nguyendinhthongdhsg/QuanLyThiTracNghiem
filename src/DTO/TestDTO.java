@@ -13,7 +13,7 @@ public class TestDTO {
     private int numEasy;
     private int numMedium;
     private int numDiff;
-    private int testLimit;
+    private int test_limit;
     private String testDate;
     private int testStatus;
 
@@ -29,7 +29,7 @@ public class TestDTO {
     this.numEasy = numEasy;
     this.numMedium = numMedium;
     this.numDiff = numDiff;
-    this.testLimit = testLimit;
+    this.test_limit = testLimit;
     this.testDate = testDate;
     this.testStatus = testStatus;
 }
@@ -100,11 +100,11 @@ public class TestDTO {
     }
 
     public int getTestLimit() {
-        return testLimit;
+        return test_limit;
     }
 
     public void setTestLimit(int testLimit) {
-        this.testLimit = testLimit;
+        this.test_limit = testLimit;
     }
 
     public String getTestDate() {
