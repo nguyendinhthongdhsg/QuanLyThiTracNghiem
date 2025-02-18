@@ -41,6 +41,7 @@ public ExamUI(int testID) {
         List<ExamsDTO> exams = examsBLL.getExamsByTestCode(test.getTestCode());
         questions = new ArrayList<>();
         allAnswers = new ArrayList<>();
+
         for (ExamsDTO exam : exams) {
             String[] questionIDs = exam.getExQuestIDs().split(",");
             for (String qID : questionIDs) {
@@ -90,7 +91,6 @@ private void initComponents(TestDTO test) {
     JPanel mainPanel = new JPanel(new BorderLayout());
     add(mainPanel, BorderLayout.CENTER);
     
-    // Khung nội dung câu hỏi (nhỏ lại)
     questionPanel = new JPanel(new BorderLayout());
     questionPanel.setMinimumSize(new Dimension(100, 100));  
     questionPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
@@ -121,155 +121,147 @@ private void initComponents(TestDTO test) {
     showQuestion(0);
 }
 
-private void showQuestion(int index) {
-    questionPanel.removeAll();
-    QuestionsDTO question = questions.get(index);
-    List<AnswersDTO> answerList = allAnswers.get(index);
-    String questionText = question.getqContent();
-    String questionImage = question.getqPictures();
-    // Tạo JLabel cho câu hỏi và thay đổi phông chữ và màu nền
-    JLabel questionLabel = new JLabel("<html><b>" + (index + 1) + ". " + questionText + "</b></html>");
-    questionLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
-    questionLabel.setBackground(new Color(230, 230, 255)); 
-    questionLabel.setOpaque(true); 
-    questionPanel.setLayout(new BoxLayout(questionPanel, BoxLayout.Y_AXIS));
-    questionPanel.setBackground(Color.WHITE);
-    // Nếu có ảnh câu hỏi
-    if (questionImage != null && !questionImage.isEmpty()) {
-        try {
-            ImageIcon originalIcon = new ImageIcon(questionImage);
-            Image image = originalIcon.getImage();
-            Image scaledImage = image.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
-            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+    private void showQuestion(int index) {
+        questionPanel.removeAll();
+        QuestionsDTO question = questions.get(index);
+        List<AnswersDTO> answerList = allAnswers.get(index);
+        String questionText = question.getqContent();
+        String questionImage = question.getqPictures();
 
-            JLabel imageLabel = new JLabel(scaledIcon);
+        JLabel questionLabel = new JLabel("<html><b>" + (index + 1) + ". " + questionText + "</b></html>");
+        questionLabel.setFont(new Font("Segoe UI", Font.BOLD, 16)); 
+        questionLabel.setBackground(new Color(230, 230, 255)); 
+        questionLabel.setOpaque(true); 
+        questionPanel.setLayout(new BoxLayout(questionPanel, BoxLayout.Y_AXIS));
+        questionPanel.setBackground(Color.WHITE);
+        // Nếu có ảnh câu hỏi
+        if (questionImage != null && !questionImage.isEmpty()) {
 
-            JPanel questionContainer = new JPanel();
-            questionContainer.setLayout(new BorderLayout());
-            questionContainer.setBackground(Color.WHITE); 
-            questionContainer.add(questionLabel, BorderLayout.NORTH);
-            questionContainer.add(imageLabel, BorderLayout.CENTER);
-
-            questionPanel.add(questionContainer);
-        } catch (Exception e) {
-            System.out.println("Lỗi khi tải hình ảnh: " + e.getMessage());
-        }
-    } else {
-        // Không có ảnh, căn trái và giảm khoảng cách
-        JPanel questionContainer = new JPanel();
-        questionContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));  
-        questionContainer.setBackground(Color.WHITE); 
-        questionContainer.add(questionLabel);  
-        questionPanel.add(questionContainer);  
-    }
-    JPanel answerPanel = new JPanel(new GridLayout(2, 2));
-    answerPanel.setBackground(Color.WHITE); 
-    answerPanel.setPreferredSize(new Dimension(400, 250));  
-    JRadioButton[] answerButtons = new JRadioButton[answerList.size()];
-    ButtonGroup group = new ButtonGroup();
-    for (int i = 0; i < answerList.size(); i++) {
-        final int answerIndex = i;  
-        String answerContent = answerList.get(answerIndex).getAwContent();
-        String answerImage = answerList.get(answerIndex).getAwPictures();
-
-        JPanel answerPanelWithImage = new JPanel();
-        answerPanelWithImage.setLayout(new BoxLayout(answerPanelWithImage, BoxLayout.X_AXIS));
-
-        JRadioButton answerButton = new JRadioButton("<html>" + answerContent + "</html>");  // Sử dụng HTML để xuống dòng khi văn bản dài
-        answerButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));  
-
-        // Set actionCommand để sử dụng khi kiểm tra
-        answerButton.setActionCommand(answerContent);
-
-        if (answerImage != null && !answerImage.isEmpty()) {
             try {
-                ImageIcon answerIcon = new ImageIcon(answerImage);
-                Image answerScaledImage = answerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                ImageIcon scaledAnswerIcon = new ImageIcon(answerScaledImage);
-
-                JLabel imageLabel = new JLabel(scaledAnswerIcon);
-                answerPanelWithImage.add(answerButton);
-                answerPanelWithImage.add(imageLabel);
+                ImageIcon originalIcon = new ImageIcon(questionImage);
+                Image image = originalIcon.getImage();
+                Image scaledImage = image.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                JLabel imageLabel = new JLabel(scaledIcon);
+                JPanel questionContainer = new JPanel();
+                questionContainer.setLayout(new BorderLayout());
+                questionContainer.setBackground(Color.WHITE); 
+                questionContainer.add(questionLabel, BorderLayout.NORTH);
+                questionContainer.add(imageLabel, BorderLayout.CENTER);
+                questionPanel.add(questionContainer);
             } catch (Exception e) {
-                System.out.println("Lỗi khi tải hình ảnh đáp án: " + e.getMessage());
+                System.out.println("Lỗi khi tải hình ảnh: " + e.getMessage());
             }
         } else {
-            answerPanelWithImage.add(answerButton);
+            // Không có ảnh, căn trái và giảm khoảng cách
+            JPanel questionContainer = new JPanel();
+            questionContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));  
+            questionContainer.setBackground(Color.WHITE); 
+            questionContainer.add(questionLabel);  
+            questionPanel.add(questionContainer);  
+        }
+        JPanel answerPanel = new JPanel(new GridLayout(2, 2));
+        answerPanel.setBackground(Color.WHITE); 
+        answerPanel.setPreferredSize(new Dimension(400, 250));  
+        JRadioButton[] answerButtons = new JRadioButton[answerList.size()];
+        ButtonGroup group = new ButtonGroup();
+        for (int i = 0; i < answerList.size(); i++) {
+            final int answerIndex = i;  
+            String answerContent = answerList.get(answerIndex).getAwContent();
+            String answerImage = answerList.get(answerIndex).getAwPictures();
+
+            JPanel answerPanelWithImage = new JPanel();
+            answerPanelWithImage.setLayout(new BoxLayout(answerPanelWithImage, BoxLayout.X_AXIS));
+            JRadioButton answerButton = new JRadioButton("<html>" + answerContent + "</html>");  // Sử dụng HTML để xuống dòng khi văn bản dài
+            answerButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));  
+
+            // Set actionCommand để sử dụng khi kiểm tra
+            answerButton.setActionCommand(answerContent);
+
+            if (answerImage != null && !answerImage.isEmpty()) {
+                try {
+                    ImageIcon answerIcon = new ImageIcon(answerImage);
+                    Image answerScaledImage = answerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    ImageIcon scaledAnswerIcon = new ImageIcon(answerScaledImage);
+
+                    JLabel imageLabel = new JLabel(scaledAnswerIcon);
+                    answerPanelWithImage.add(answerButton);
+                    answerPanelWithImage.add(imageLabel);
+                } catch (Exception e) {
+                    System.out.println("Lỗi khi tải hình ảnh đáp án: " + e.getMessage());
+                }
+            } else {
+                answerPanelWithImage.add(answerButton);
+            }
+
+            group.add(answerButton);
+
+            // Lưu đáp án đã chọn khi nhấn vào
+            answerButton.addActionListener(e -> {
+                questionButtons[index].setBackground(new Color(173, 216, 230));
+                // Lưu đáp án vào selectedAnswers
+                selectedAnswers.put(question.getqID(), answerList.get(answerIndex)); 
+            });
+
+            answerPanel.add(answerPanelWithImage);
         }
 
-        group.add(answerButton);
-
-        // Lưu đáp án đã chọn khi nhấn vào
-        answerButton.addActionListener(e -> {
-            questionButtons[index].setBackground(new Color(173, 216, 230));
-
-            // Lưu đáp án vào selectedAnswers
-            selectedAnswers.put(question.getqID(), answerList.get(answerIndex)); 
-            System.out.println("Đáp án cho câu " + (index + 1) + " đã được chọn: " + answerContent); 
-        });
-
-        answerPanel.add(answerPanelWithImage);
-    }
-
-    questionPanel.add(answerPanel);
-    revalidate();
-    repaint();
-}
-
+        questionPanel.add(answerPanel);
+        revalidate();
+        repaint();
+        }
 
     private void submitExam() {
-        System.out.println("Submit exam called");
-
         int score = 0;
 
         for (int i = 0; i < questions.size(); i++) {
             QuestionsDTO question = questions.get(i);
             List<AnswersDTO> answerList = allAnswers.get(i);
+
+            // Chuẩn hóa độ khó
+            String difficultyLevel = (question.getqLevel() != null) ? question.getqLevel().trim().toLowerCase() : "";
+
             String correctTextAnswer = "";
             String correctImageAnswer = "";
 
+            // Tìm đáp án đúng
             for (AnswersDTO answer : answerList) {
                 if (answer.isRight()) {
-                    correctTextAnswer = answer.getAwContent();
-                    correctImageAnswer = answer.getAwPictures();
+                    correctTextAnswer = (answer.getAwContent() != null) ? answer.getAwContent().trim() : "";
+                    correctImageAnswer = (answer.getAwPictures() != null) ? answer.getAwPictures().trim() : "";
                     break;
                 }
             }
 
-            boolean answeredCorrectly = false;
+            // Lấy đáp án đã chọn
             AnswersDTO selectedAnswer = selectedAnswers.get(question.getqID());
 
             if (selectedAnswer != null) {
-                boolean textCorrect = (selectedAnswer.getAwContent() != null && selectedAnswer.getAwContent().equals(correctTextAnswer));
-                boolean imageCorrect = (selectedAnswer.getAwPictures() != null && selectedAnswer.getAwPictures().equals(correctImageAnswer));
+                String selectedText = (selectedAnswer.getAwContent() != null) ? selectedAnswer.getAwContent().trim() : "";
+                String selectedImage = (selectedAnswer.getAwPictures() != null) ? selectedAnswer.getAwPictures().trim() : "";
+
+                // Kiểm tra đáp án đúng
+                boolean textCorrect = selectedText.equals(correctTextAnswer);
+                boolean imageCorrect = (correctImageAnswer.isEmpty() && selectedImage.isEmpty()) || selectedImage.equals(correctImageAnswer);
 
                 if (textCorrect || imageCorrect) {
-                    answeredCorrectly = true;
-                }
-            }
 
-            if (answeredCorrectly) {
-                switch (question.getqLevel()) {
-                    case "easy":
+                    // Cộng điểm dựa trên độ khó
+                    if ("dễ".equals(difficultyLevel)) {
                         score += 1;
-                        break;
-                    case "medium":
+                    } else if ("trung bình".equals(difficultyLevel)) {
                         score += 2;
-                        break;
-                    case "difficult":
+                    } else if ("khó".equals(difficultyLevel)) {
                         score += 3;
-                        break;
-                }
-            }
+                    } 
+                } 
+            } 
         }
 
         JOptionPane.showMessageDialog(this, "Bài thi đã được nộp!\nTổng điểm: " + score, "Kết quả thi", JOptionPane.INFORMATION_MESSAGE);
         SwingUtilities.getWindowAncestor(this).dispose();
         new ExamSelectionUI().setVisible(true);
     }
-
-
-
 
     private void startTimer() {
         timer = new Timer(1000, new ActionListener() {
@@ -292,12 +284,11 @@ private void showQuestion(int index) {
         return String.format("%02d:%02d", minutes, secs);
     }
 
-
     private void exitExam() {
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát?", "Xác nhận", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             SwingUtilities.getWindowAncestor(this).dispose(); 
             new ExamSelectionUI().setVisible(true); 
+        }
     }
-}
 }
