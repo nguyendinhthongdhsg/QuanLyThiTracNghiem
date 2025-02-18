@@ -172,7 +172,7 @@ private void initComponents(TestDTO test) {
 
             JPanel answerPanelWithImage = new JPanel();
             answerPanelWithImage.setLayout(new BoxLayout(answerPanelWithImage, BoxLayout.X_AXIS));
-            JRadioButton answerButton = new JRadioButton("<html>" + answerContent + "</html>");  // Sử dụng HTML để xuống dòng khi văn bản dài
+            JRadioButton answerButton = new JRadioButton("<html>" + answerContent + "</html>");  
             answerButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));  
 
             // Set actionCommand để sử dụng khi kiểm tra
