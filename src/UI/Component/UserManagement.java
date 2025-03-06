@@ -9,8 +9,12 @@ import DTO.UsersDTO;
 import UI.Add.UserAdd;
 import UI.Detail.UserDetail;
 import UI.Update.UserUpdate;
+import helper.ImportExcel;
 import java.awt.Font;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -88,6 +92,8 @@ public class UserManagement extends javax.swing.JPanel {
         jButtonUpdate = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonDetail = new javax.swing.JButton();
+        jButtonResetPassword = new javax.swing.JButton();
+        jButtonImport = new javax.swing.JButton();
         jTextFieldSearch = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -155,6 +161,32 @@ public class UserManagement extends javax.swing.JPanel {
         });
         jToolBarMenu.add(jButtonDetail);
 
+        jButtonResetPassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonResetPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/reset.png"))); // NOI18N
+        jButtonResetPassword.setText("Đặt lại mật khẩu");
+        jButtonResetPassword.setFocusable(false);
+        jButtonResetPassword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonResetPassword.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonResetPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonResetPasswordMouseReleased(evt);
+            }
+        });
+        jToolBarMenu.add(jButtonResetPassword);
+
+        jButtonImport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/xls.png"))); // NOI18N
+        jButtonImport.setText("Nhập excel");
+        jButtonImport.setFocusable(false);
+        jButtonImport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonImport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonImport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonImportMouseReleased(evt);
+            }
+        });
+        jToolBarMenu.add(jButtonImport);
+
         jTextFieldSearch.setText("Nhập nội dung tìm kiếm...");
         jTextFieldSearch.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -171,7 +203,7 @@ public class UserManagement extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -296,8 +328,10 @@ public class UserManagement extends javax.swing.JPanel {
                             "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
             if(checkValueChoice == JOptionPane.YES_OPTION) {
                 UsersDTO user = userList.get(indexSelectedRow);
-                UserDetail userDetail = new UserDetail((JFrame) SwingUtilities.getWindowAncestor(this), true, user);
-                userDetail.setVisible(true);
+                String result = userBLL.delete(user.getUserID());
+                JOptionPane.showMessageDialog(this, result, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                userList = userBLL.getUserList();
+                loadDataToTable(userList);
             }
         }
     }//GEN-LAST:event_jButtonDeleteMouseReleased
@@ -318,11 +352,67 @@ public class UserManagement extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonDetailMouseReleased
 
+    private void jButtonResetPasswordMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonResetPasswordMouseReleased
+        int indexSelectedRow = jTableUser.getSelectedRow();
+        if(indexSelectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Vui lòng chọn người dùng muốn đặt lại mật khẩu!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        } else {
+            int checkValueChoice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đặt lại mật khẩu người dùng này?",
+                            "Xác nhận đặt lại mật khẩu", JOptionPane.YES_NO_OPTION);
+            if(checkValueChoice == JOptionPane.YES_OPTION) {
+                UsersDTO user = userList.get(indexSelectedRow);
+                String result = userBLL.resetPassword(user.getUserID());
+                JOptionPane.showMessageDialog(this, result, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                userList = userBLL.getUserList();
+                loadDataToTable(userList);
+            }
+        }
+    }//GEN-LAST:event_jButtonResetPasswordMouseReleased
+
+    private void jButtonImportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonImportMouseReleased
+        // Mở hộp thoại chọn file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn file Excel");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        // Lọc chỉ hiển thị file .xlsx
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            ImportExcel importExcel = new ImportExcel();
+            File selectedFile = fileChooser.getSelectedFile();
+            List<UsersDTO> userListNew = importExcel.readFileUser(selectedFile);
+            for(UsersDTO user : userListNew) {
+                userBLL.add(user);
+            }
+            JOptionPane.showMessageDialog(this, "Thêm danh sách người dùng thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            userList = userBLL.getUserList();
+            loadDataToTable(userList);
+            
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Không có file nào được chọn!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_jButtonImportMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonDetail;
+    private javax.swing.JButton jButtonImport;
+    private javax.swing.JButton jButtonResetPassword;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;

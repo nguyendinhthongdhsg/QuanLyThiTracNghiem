@@ -120,4 +120,23 @@ public class UsersDAL {
         }
         return result;
    }
+   
+   
+    
+    public boolean resetPasword(int userID, String password) {
+        String sql = "UPDATE Users SET userPassword=? where userID=?";
+        try (Connection conn = MySQLConnection.getConnection(); 
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, password);
+            ps.setInt(2, userID);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public void saveUserAction() {
+        
+    }
 }

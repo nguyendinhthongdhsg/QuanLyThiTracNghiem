@@ -90,7 +90,7 @@ public class Login extends javax.swing.JPanel {
 
         jCheckBoxRememberPassword.setText("Nhớ mật khẩu");
 
-        jTextField1.setText("nguyendinhthong");
+        jTextField1.setText("admin");
 
         jLabel4.setText("Tên đăng nhập");
 
@@ -106,7 +106,7 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-        jPasswordField1.setText("anhladuado1");
+        jPasswordField1.setText("admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

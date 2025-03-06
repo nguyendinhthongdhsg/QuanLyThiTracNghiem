@@ -2,8 +2,10 @@ package UI.Component;
 
 import BLL.QuestionsBLL;
 import BLL.TopicsBLL;
+import DTO.AnswersDTO;
 import DTO.QuestionsDTO;
 import DTO.TopicsDTO;
+import helper.ImportExcel;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,6 +18,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class QuestionManagementUI extends JPanel {
 
@@ -26,7 +29,7 @@ public class QuestionManagementUI extends JPanel {
     private JComboBox<String> cbLevel, cbTopic;
     private JTable tblQuestions;
     private DefaultTableModel tableModel;
-    private JButton btnAdd, btnEdit, btnDelete, btnSearch, btnReload;
+    private JButton btnAdd, btnEdit, btnDelete, btnSearch, btnReload, btnImport;
     private JButton btnChooseImage;
     private JLabel lblImagePath, lblImagePreview;
     private String selectedImagePath = "";
@@ -101,6 +104,8 @@ public class QuestionManagementUI extends JPanel {
         btnSearch.setIcon(new ImageIcon(getClass().getResource("/icon/search.png")));
         btnReload = new JButton("Tải lại");
         btnReload.setIcon(new ImageIcon(getClass().getResource("/icon/reload.png")));
+        btnImport = new JButton("Nhập excel");
+        btnImport.setIcon(new ImageIcon(getClass().getResource("/icon/xls.png")));
 
         txtSearch = new JTextField(15);
 
@@ -110,7 +115,8 @@ public class QuestionManagementUI extends JPanel {
         panelButtons.add(btnEdit);
         panelButtons.add(btnDelete);
         panelButtons.add(btnReload);
-
+        panelButtons.add(btnImport);
+        
         tableModel = new DefaultTableModel(new String[]{"ID", "Nội dung", "Chủ đề", "Mức độ", "Thêm Câu Trả Lời", "Ảnh"}, 0);
 
         tblQuestions = new JTable(tableModel);
@@ -141,7 +147,8 @@ public class QuestionManagementUI extends JPanel {
         btnSearch.addActionListener(e -> searchQuestion());
         btnReload.addActionListener(e -> loadQuestions());
         btnChooseImage.addActionListener(e -> chooseImage());
-
+        btnImport.addActionListener(e -> importExcelQuestion());
+        
         // Bắt sự kiện chọn dòng trong bảng để hiển thị ảnh
         tblQuestions.getSelectionModel().addListSelectionListener(e -> {
             int selectedRow = tblQuestions.getSelectedRow();
@@ -401,6 +408,37 @@ public class QuestionManagementUI extends JPanel {
         selectedImagePath = "";
         lblImagePath.setText("Chưa chọn ảnh");
         lblImagePreview.setIcon(null);
+    }
+    
+    public void importExcelQuestion() {
+        // Mở hộp thoại chọn file
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn file Excel");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        // Lọc chỉ hiển thị file .xlsx
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Excel Files (*.xlsx)", "xlsx"));
+
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            ImportExcel importExcel = new ImportExcel();
+            File selectedFile = fileChooser.getSelectedFile();
+            List<QuestionsDTO> questionListNew = importExcel.readFileQuestion(selectedFile);
+            for(QuestionsDTO question : questionListNew) {
+                questionsBLL.addQuestion(question);
+            }
+            JOptionPane.showMessageDialog(this, "Thêm danh sách câu hỏi thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            loadQuestions();
+            
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Không có file nào được chọn!",
+                "Cảnh Báo",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
     }
 
     public static void main(String[] args) {

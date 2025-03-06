@@ -176,7 +176,7 @@ public class AnswersManagement extends JDialog {
     AnswersDTO answer = new AnswersDTO();
     answer.setqID(questionID);
     
-        answer.setAwContent(content.isEmpty() ? "" : content);  
+    answer.setAwContent(content.isEmpty() ? "" : content);  
     answer.setAwPictures(selectedImagePath);
     answer.setIsRight(isCorrect);
     answer.setAwStatus((byte) 1);

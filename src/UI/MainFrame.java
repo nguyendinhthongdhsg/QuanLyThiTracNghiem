@@ -8,11 +8,16 @@ import DTO.UsersDTO;
 import UI.Component.ExamManagementUI;
 import UI.Component.ExamSelectionUI;
 import UI.Component.QuestionManagementUI;
+import UI.Component.Statistical;
 import UI.Component.TestManagementUI;
 import UI.Component.TopicsManagement;
 import UI.Component.UserManagement;
+import UI.Update.UserInfoUpdate;
+import UI.Update.UserUpdate;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -109,6 +114,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(249, 249, 249));
 
         jButtonInformation.setText("Thông tin cá nhân");
+        jButtonInformation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonInformationMouseReleased(evt);
+            }
+        });
 
         jButtonUserManagement.setText("Người dùng");
         jButtonUserManagement.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,6 +129,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButtonStatistical.setText("Thống kê");
         jButtonStatistical.setToolTipText("");
+        jButtonStatistical.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButtonStatisticalMouseReleased(evt);
+            }
+        });
 
         jButtonQuestionManagement.setText("Câu hỏi");
         jButtonQuestionManagement.addActionListener(new java.awt.event.ActionListener() {
@@ -416,6 +431,16 @@ public class MainFrame extends javax.swing.JFrame {
                 ExamSelectionUI jPanelExamSelectionUI  = new ExamSelectionUI();
         jPanelLoader.jPanelLoader(jPanelFunction, jPanelExamSelectionUI);
     }//GEN-LAST:event_jButtonTakeTestActionPerformed
+
+    private void jButtonInformationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInformationMouseReleased
+        UserInfoUpdate userInfoUpdate = new UserInfoUpdate((JFrame) SwingUtilities.getWindowAncestor(this), true, userLogin);
+        userInfoUpdate.setVisible(true);
+    }//GEN-LAST:event_jButtonInformationMouseReleased
+
+    private void jButtonStatisticalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonStatisticalMouseReleased
+        Statistical satistical = new Statistical();
+        jPanelLoader.jPanelLoader(jPanelFunction, satistical);
+    }//GEN-LAST:event_jButtonStatisticalMouseReleased
                                             
      
     /**

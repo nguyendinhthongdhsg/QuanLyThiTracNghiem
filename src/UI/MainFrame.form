@@ -219,6 +219,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin c&#xe1; nh&#xe2;n"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonInformationMouseReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonUserManagement">
                   <Properties>
@@ -233,6 +236,9 @@
                     <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea;"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonStatisticalMouseReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonQuestionManagement">
                   <Properties>

@@ -83,6 +83,17 @@ public class UsersBLL {
     public ArrayList<UsersDTO> getUserList() {
         return usersDAL.getUserList();
     }
+    
+    public String resetPassword(int userID) {
+        // Mã hóa mật khẩu trước khi lưu 
+        String password= hashPassword("123456");
+        // Lưu vào CSDL
+        if (usersDAL.resetPasword(userID, password)) {
+            return "Đặt lại mật khẩu thành công!";
+        } else {
+            return "Đặt lại mật khẩu thất bại. Vui lòng thử lại!";
+        }
+    }
 
     private String hashPassword(String password) {
         return password; 

@@ -2,8 +2,11 @@ package UI.Component;
 
 import UI.Edit.ExamEdit;
 import BLL.ExamsBLL;
+import BLL.TestBLL;
 import DTO.ExamsDTO;
+import DTO.TestDTO;
 import UI.Add.ExamAdd;
+import helper.ExportDocx;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EmptyBorder;
@@ -167,7 +170,17 @@ public class ExamManagementUI extends JPanel {
         }
     }
     
-        private void exportExam() {
-        // Chức năng xuất file đề thi
+    private void exportExam() {
+        int selectedRow = examTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn đề thi để xuất!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int examId = (int) tableModel.getValueAt(selectedRow, 0);
+        ExamsDTO exam = examsBLL.getExamById(examId);
+        TestBLL testBLL = new TestBLL();
+        TestDTO test = testBLL.getTestByCode(exam.getTestCode());
+        ExportDocx export = new ExportDocx();
+        boolean checkExport = export.exportDeThi(test);
     }
 }
