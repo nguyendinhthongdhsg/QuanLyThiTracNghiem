@@ -11,15 +11,19 @@ public class QuestionsBLL {
     private AnswersDAL answersDAL = new AnswersDAL();
 
     public boolean addQuestion(QuestionsDTO question) {
-        int questionID = questionsDAL.addQuestion(question);
-        if (questionID > 0) {
-            for (AnswersDTO answer : question.getAnswers()) {
-                answersDAL.addAnswer(answer, questionID);
+    boolean isQuestionAdded = questionsDAL.addQuestion(question);  
+    if (isQuestionAdded) {
+        for (AnswersDTO answer : question.getAnswers()) {
+            boolean isAnswerAdded = answersDAL.addAnswer(answer, question.getqID());
+            if (!isAnswerAdded) {
+                return false; 
             }
-            return true;
         }
-        return false;
+        return true;  
     }
+    return false; 
+}
+
     
     public List<QuestionsDTO> getAllQuestions() {
         return questionsDAL.getAllQuestions();

@@ -26,7 +26,11 @@ public class MySQLConnection {
             //Cac thong so
             String url = "jdbc:mySQL://localhost:3306/quanlythitracnghiem";
             String userName = "root";
+<<<<<<< HEAD
             String password = "anhladuado1";
+=======
+            String password = "20112004";
+>>>>>>> 2bb3f69b172f246167d85337cba77a983e460371
             //Tao ket noi 
             result = DriverManager.getConnection(url, userName, password);
             System.out.println("/* Connected database! */");
